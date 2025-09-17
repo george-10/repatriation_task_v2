@@ -8,7 +8,7 @@ if [ $# -ne 1 ]; then
   echo "Usage: $0 <resource-group>"
   exit 1
 fi
-mkdir -p urls
+mkdir -p $WDIR/urls
 [ -f $WDIR/urls/new_url.env ] && rm $WDIR/urls/new_url.env
 
 rgName=$1
