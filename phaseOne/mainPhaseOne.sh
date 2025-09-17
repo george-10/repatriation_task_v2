@@ -2,6 +2,7 @@
 set -euo pipefail
 
 WDIR="$HOME/repatriationTask/_work"
+HDIR="$HOME/repatriationTask/helperFunctions"
 
 if [ $# -lt 4 ]; then
   echo "Usage: $0 <resource-group> <app-service-name> <mysql-server-name> <db-password>"
@@ -39,4 +40,7 @@ echo $dbPassword
 echo $dbServerHostName
 echo $dbDatabase
 ./extractSqlDump.sh $dbUserName $dbDatabase $dbPassword $dbServerHostName
+
+$HDIR/getRegion.sh $resourceGroup > $WDIR/oldRegion.txt
+
 echo "Phase One Completed"

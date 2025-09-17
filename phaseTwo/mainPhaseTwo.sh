@@ -1,5 +1,9 @@
 #!/bin/bash
 
+HDIR="$HOME/repatriationTask/helperFunctions"
+WDIR="$HOME/repatriationTask/_work"
+
+mkdir -p $WDIR/resources
 mv ../input.json .
 
 oldSubscriptionName=$(jq -r '.oldSubscriptionName' input.json)
@@ -26,7 +30,18 @@ else
 fi
 
 
+oldRegion=$(cat $WDIR/oldRegion.txt)
+newRegion=$($HDIR/getRegion.sh "$newResourceGroup")
 
-# 1. Modify wwwroot
-./modifyWordpressDirectory.sh 
-# 2. 
+echo "Phase Two:"
+./modifyAppServicePlan.sh "$oldRegion" "$newRegion" "$oldAppServiceName" "$newAppServiceName"
+./deployResource.sh "$oldAppServiceName" "$newResourceGroup"
+
+./modifyAppService.sh "$oldRegion" "$newRegion" "$oldAppServiceName" "$newAppServiceName" "$newResourceGroup"
+./deployResource.sh "$oldAppServiceName" "$newResourceGroup"
+
+./modifyDatabase.sh "$oldRegion" "$newRegion" "$oldSqlServerName" "$newSqlServerName" "$dbPassword"
+./deployResource.sh "$oldSqlServerName" "$newResourceGroup"
+
+rm input.json
+echo "Phase Two Completed"
