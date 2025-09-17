@@ -53,6 +53,9 @@ for i in $(seq 0 $((count-1))); do
   ./mainPhaseTwo.sh
   cd $DIR
 
+  cd ./phaseThree
+  ./mainPhaseThree.sh $newResourceGroup $newSqlServerName $dbPassword
+  cd $DIR
 done
 
 cd "$HOME"

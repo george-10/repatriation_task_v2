@@ -1,4 +1,6 @@
 #!/bin/bash
+HDIR="$HOME/repatriationTask/helperFunctions"
+WDIR="$HOME/repatriationTask/_work"
 
 if [ $# -ne 4 ]; then
     echo "Usage: $0 <username> <database-name> <db-password> <host>"
@@ -12,7 +14,7 @@ host=$4
 
 export MYSQL_PWD="$pass"
 
-mysql -h "$host" -u "$user" "$database" < ./dump.sql
+mysql -h "$host" -u "$user" "$database" < $WDIR/dump.sql
 
 if [ $? -eq 0 ]; then
     echo "Export completed successfully"
