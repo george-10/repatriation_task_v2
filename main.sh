@@ -56,7 +56,8 @@ for i in $(seq 0 $((count-1))); do
   cd ./phaseThree
   ./mainPhaseThree.sh $newResourceGroup $newSqlServerName $dbPassword
   cd $DIR
-  
+
+  rm ./input.json
   rm -rf ./_work
 done
 
