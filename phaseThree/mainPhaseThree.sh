@@ -17,15 +17,16 @@ dbDatabase=$(az mysql flexible-server db list \
   --query "[?name!='information_schema' && name!='mysql' && name!='performance_schema' && name!='sys'].name" \
   -o tsv)
 dbServerHostName="$3.mysql.database.azure.com"
-#dbUserName=$(jq -r '.resources[] | select(.properties.administratorLogin != null) | .properties.administratorLogin' "$WDIR/resources_template/$mysqlServerName.json")
-dbUserName="localadmin"
+dbUserName=$(cat $WDIR/dbUserName.txt)
+
+echo "Phase Three:"
 echo resourceGroup: $resourceGroup
 echo mysqlServerName: $mysqlServerName
 echo dbUserName: $dbUserName
 
-echo "Phase Three:"
 echo "Getting New URL"
 
+$HDIR/addFirewallRule.sh "$resourceGroup" "$mysqlServerName"
 $HDIR/getNewUrl.sh $resourceGroup
 
 echo "Modifying SQL Dump and WordPress Directory"
@@ -36,4 +37,5 @@ echo "Deploying SQL Dump and WordPress Directory"
 ./deploySqlDump.sh $dbUserName $dbDatabase $dbPassword $dbServerHostName
 ./deployWordpressDirectory.sh $resourceGroup
 
+$HDIR/removeFirewallRule.sh "$resourceGroup" "$mysqlServerName"
 echo "Phase Three Completed"

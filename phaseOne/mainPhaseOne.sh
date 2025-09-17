@@ -12,6 +12,7 @@ fi
 resourceGroup=$1
 appServiceName=$2
 mysqlServerName=$3
+dbPassword=$4
 appServicePlanName=$(az webapp show \
   --resource-group $resourceGroup \
   --name $appServiceName \
@@ -20,7 +21,6 @@ appServicePlanName=$(az webapp show \
 
 echo $appServicePlanName > $WDIR/appServicePlanName.txt
 
-dbPassword=$4
 dbDatabase=$(az mysql flexible-server db list \
   --resource-group $resourceGroup \
   --server-name $mysqlServerName \
@@ -32,6 +32,9 @@ echo "Phase One:"
 echo "Resource Group: $resourceGroup"
 echo "App Service: $appServiceName"
 echo "MySQL Server: $mysqlServerName"
+
+$HDIR/addFirewallRule.sh "$resourceGroup" "$mysqlServerName"
+
 ./extractArmTemplate.sh "$resourceGroup" "$appServicePlanName"
 ./extractArmTemplate.sh "$resourceGroup" "$appServiceName"
 ./extractArmTemplate.sh "$resourceGroup" "$mysqlServerName"
@@ -41,8 +44,11 @@ echo $dbUserName
 echo $dbPassword
 echo $dbServerHostName
 echo $dbDatabase
+
+echo $dbUserName > $WDIR/dbUserName.txt
+
 ./extractSqlDump.sh $dbUserName $dbDatabase $dbPassword $dbServerHostName
 
 $HDIR/getRegion.sh $resourceGroup > $WDIR/oldRegion.txt
-
+$HDIR/removeFirewallRule.sh "$resourceGroup" "$mysqlServerName"
 echo "Phase One Completed"
