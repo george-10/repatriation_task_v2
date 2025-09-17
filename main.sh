@@ -44,9 +44,9 @@ for i in $(seq 0 $((count-1))); do
   echo "  newAppServiceSubnet: $newAppServiceSubnet"
   echo "  dbPassword: $dbPassword"
 
-#  cd ./phaseOne
-#  ./mainPhaseOne.sh $oldResourceGroup $oldAppServiceName $oldSqlServerName $dbPassword
-#  cd $DIR
+  cd ./phaseOne
+  ./mainPhaseOne.sh $oldResourceGroup $oldAppServiceName $oldSqlServerName $dbPassword
+  cd $DIR
 
   cp ./input.json ./phaseTwo
   cd ./phaseTwo

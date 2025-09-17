@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ $# -ne 7 ]; then
+if [ $# -ne 5 ]; then
   echo "Usage: $0 <old-region> <new-region> <old-name> <new-name> <resource-group>"
   exit 1
 fi

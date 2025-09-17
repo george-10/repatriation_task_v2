@@ -18,6 +18,8 @@ appServicePlanName=$(az webapp show \
   --query appServicePlanId -o tsv | awk -F/ '{print $NF}'
 )
 
+echo $appServicePlanName > $WDIR/appServicePlanName.txt
+
 dbPassword=$4
 dbDatabase=$(az mysql flexible-server db list \
   --resource-group $resourceGroup \

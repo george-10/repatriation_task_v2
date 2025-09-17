@@ -3,7 +3,7 @@ set -euo pipefail
 
 WDIR="$HOME/repatriationTask/_work"
 
-if [ "$#" -ne 4 ]; then
+if [ "$#" -ne 2 ]; then
   echo "Usage: $0 <resource-name> <resource-group>"
   exit 1
 fi

@@ -6,9 +6,9 @@
     "oldSqlServerName": "fs-wordperssdummy-sc",
 
     "newSubscriptionName": "x",
-    "newResourceGroup": "as-wordpress-sc-001rg-wordpress-fc",
+    "newResourceGroup": "rg-wordpress-fc",
     "newAppServiceName": "as-wordpress-fc-001",
-    "newSqlServerName": "fs-wordpressdummy-sc",
+    "newSqlServerName": "fs-wordpressdummy-fc",
     "newAppServiceSubnet": "subnet0",
 
     "dbPassword": "Standard@123"
