@@ -72,3 +72,9 @@ jq --arg db "$newName" \
   'del(.resources[] | select(.type=="Microsoft.DBforMySQL/flexibleServers/configurations"
                              and .name==($db + "/slow_query_log_file")))' \
   $WDIR/resources_template/$oldName.json > tmp.json && mv tmp.json $WDIR/resources_template/$oldName.json
+
+jq '(.resources[] 
+    | select(.type=="Microsoft.DBforMySQL/flexibleServers") 
+    | .properties) |= del(.databasePort)' \
+"$WDIR/resources_template/$oldName.json" > tmp.json && mv tmp.json "$WDIR/resources_template/$oldName.json"
+
