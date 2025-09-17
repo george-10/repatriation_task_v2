@@ -1,0 +1,29 @@
+#!/bin/bash
+set -euo pipefail
+
+WDIR="$HOME/repatriationTask/_work"
+
+mkdir -p $WDIR/resources_template
+
+if [ $# -ne 2 ]; then
+  echo "Usage: $0 <resource-group> <resource-name>"
+  exit 1
+fi
+
+RG=$1
+RN=$2
+
+echo "Extracting template of $RN"
+ids=$(az resource list --resource-group "$RG" --query "[?name=='$RN'].id" -o tsv)
+n=$(printf "%s\n" "$ids" | grep -c . || true)
+
+if [ "$n" -eq 0 ]; then
+  echo "No resource named '$RN' found in resource group '$RG'."
+  exit 1
+elif [ "$n" -gt 1 ]; then
+  echo "Two or more resources named '$RN' in '$RG':"
+  printf "%s\n" "$ids"
+  exit 1
+fi
+
+echo $(az group export --name "$RG" --resource-ids $ids --skip-resource-name-params) > $WDIR/resources_template/$RN.json
