@@ -20,7 +20,7 @@ jq '(.resources[] | select(.type == "Microsoft.Web/sites") | .properties) |= del
    $WDIR/resources_template/$oldName.json > tmp.json && mv tmp.json $WDIR/resources_template/$oldName.json
 
 jq 'del(.resources[] | select(.type == "Microsoft.Web/sites/hostNameBindings"))' \
-   ./resources_template/$oldName.json > tmp.json && mv tmp.json ./resources_template/$oldName.json
+   $WDIR/resources_template/$oldName.json > tmp.json && mv tmp.json $WDIR/resources_template/$oldName.json
 
 jq --arg id "$($HDIR/getAppServicePlanId.sh $resourceGroup)" \
   '.parameters |= with_entries(if (.key | test("^serverfarms_.*_externalid$")) then .value.defaultValue = $id else . end)' \
