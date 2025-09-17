@@ -11,8 +11,6 @@ resourceGroup=$1
 mysqlServerName=$2
 dbPassword=$3
 
-
-dbPassword=$4
 dbDatabase=$(az mysql flexible-server db list \
   --resource-group $resourceGroup \
   --server-name $mysqlServerName \
@@ -21,8 +19,15 @@ dbDatabase=$(az mysql flexible-server db list \
 dbServerHostName="$3.mysql.database.azure.com"
 dbUserName=$(jq -r '.resources[] | select(.properties.administratorLogin != null) | .properties.administratorLogin' "$WDIR/resources_template/$mysqlServerName.json")
 
+echo resourceGroup: $resourceGroup
+echo mysqlServerName: $mysqlServerName
+echo dbUserName: $dbUserName
 
 echo "Phase Three:"
+echo "Getting New URL"
+
+$HDIR/getNewUrl.sh $resourceGroup
+
 echo "Modifying SQL Dump and WordPress Directory"
 ./modifySqlDump.sh 
 ./modifyWordpressDirectory.sh $resourceGroup
