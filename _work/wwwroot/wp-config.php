@@ -29,7 +29,7 @@ define( 'DB_USER', 'localadmin' );
 define( 'DB_PASSWORD', 'Standard@123' );
 
 /** Database hostname */
-define( 'DB_HOST', 'fs-wordperssdummy-sc.mysql.database.azure.com' );
+define( 'DB_HOST', 'fs-wordpressdummy-fc.mysql.database.azure.com' );
 
 /** Database charset to use in creating database tables. */
 define( 'DB_CHARSET', 'utf8' );

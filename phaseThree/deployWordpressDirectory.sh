@@ -14,12 +14,6 @@ APP_NAME=$(az webapp list \
   --resource-group $RESOURCE_GROUP \
   --query "[0].name" -o tsv)
 
-
-if [ ! -f "wordpress.zip" ]; then
-    echo "Error: wordpress.zip not found in current directory."
-    exit 1
-fi
-
 echo "Deploying wordpress.zip to App Service '$APP_NAME' in resource group '$RESOURCE_GROUP'..."
 az webapp deploy \
     --resource-group "$RESOURCE_GROUP" \

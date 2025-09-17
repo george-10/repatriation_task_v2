@@ -17,8 +17,8 @@ dbDatabase=$(az mysql flexible-server db list \
   --query "[?name!='information_schema' && name!='mysql' && name!='performance_schema' && name!='sys'].name" \
   -o tsv)
 dbServerHostName="$3.mysql.database.azure.com"
-dbUserName=$(jq -r '.resources[] | select(.properties.administratorLogin != null) | .properties.administratorLogin' "$WDIR/resources_template/$mysqlServerName.json")
-
+#dbUserName=$(jq -r '.resources[] | select(.properties.administratorLogin != null) | .properties.administratorLogin' "$WDIR/resources_template/$mysqlServerName.json")
+dbUserName="localadmin"
 echo resourceGroup: $resourceGroup
 echo mysqlServerName: $mysqlServerName
 echo dbUserName: $dbUserName
@@ -29,11 +29,11 @@ echo "Getting New URL"
 $HDIR/getNewUrl.sh $resourceGroup
 
 echo "Modifying SQL Dump and WordPress Directory"
-./modifySqlDump.sh 
+./modifySqlDump.sh
 ./modifyWordpressDirectory.sh $resourceGroup
 
 echo "Deploying SQL Dump and WordPress Directory"
-./deploySqlDump.sh $dbUserName $dbDatabase $dbPassword $dbServerHost
+./deploySqlDump.sh $dbUserName $dbDatabase $dbPassword $dbServerHostName
 ./deployWordpressDirectory.sh $resourceGroup
 
 echo "Phase Three Completed"
