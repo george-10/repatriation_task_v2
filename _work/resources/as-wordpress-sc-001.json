@@ -1,0 +1,239 @@
+{
+  "id": "/subscriptions/c541911a-3688-4094-8f3e-57bb2bbffce2/resourceGroups/rg-wordpress-fc/providers/Microsoft.Resources/deployments/as-wordpress-sc-001",
+  "location": null,
+  "name": "as-wordpress-sc-001",
+  "properties": {
+    "correlationId": "e47e5316-5388-4bf2-a5d7-109bda5bd0ce",
+    "debugSetting": null,
+    "dependencies": [
+      {
+        "dependsOn": [
+          {
+            "id": "/subscriptions/c541911a-3688-4094-8f3e-57bb2bbffce2/resourceGroups/rg-wordpress-fc/providers/Microsoft.Web/sites/as-wordpress-fc-001",
+            "resourceGroup": "rg-wordpress-fc",
+            "resourceName": "as-wordpress-fc-001",
+            "resourceType": "Microsoft.Web/sites"
+          }
+        ],
+        "id": "/subscriptions/c541911a-3688-4094-8f3e-57bb2bbffce2/resourceGroups/rg-wordpress-fc/providers/Microsoft.Web/sites/as-wordpress-fc-001/basicPublishingCredentialsPolicies/ftp",
+        "resourceGroup": "rg-wordpress-fc",
+        "resourceName": "as-wordpress-fc-001/ftp",
+        "resourceType": "Microsoft.Web/sites/basicPublishingCredentialsPolicies"
+      },
+      {
+        "dependsOn": [
+          {
+            "id": "/subscriptions/c541911a-3688-4094-8f3e-57bb2bbffce2/resourceGroups/rg-wordpress-fc/providers/Microsoft.Web/sites/as-wordpress-fc-001",
+            "resourceGroup": "rg-wordpress-fc",
+            "resourceName": "as-wordpress-fc-001",
+            "resourceType": "Microsoft.Web/sites"
+          }
+        ],
+        "id": "/subscriptions/c541911a-3688-4094-8f3e-57bb2bbffce2/resourceGroups/rg-wordpress-fc/providers/Microsoft.Web/sites/as-wordpress-fc-001/basicPublishingCredentialsPolicies/scm",
+        "resourceGroup": "rg-wordpress-fc",
+        "resourceName": "as-wordpress-fc-001/scm",
+        "resourceType": "Microsoft.Web/sites/basicPublishingCredentialsPolicies"
+      },
+      {
+        "dependsOn": [
+          {
+            "id": "/subscriptions/c541911a-3688-4094-8f3e-57bb2bbffce2/resourceGroups/rg-wordpress-fc/providers/Microsoft.Web/sites/as-wordpress-fc-001",
+            "resourceGroup": "rg-wordpress-fc",
+            "resourceName": "as-wordpress-fc-001",
+            "resourceType": "Microsoft.Web/sites"
+          }
+        ],
+        "id": "/subscriptions/c541911a-3688-4094-8f3e-57bb2bbffce2/resourceGroups/rg-wordpress-fc/providers/Microsoft.Web/sites/as-wordpress-fc-001/config/web",
+        "resourceGroup": "rg-wordpress-fc",
+        "resourceName": "as-wordpress-fc-001/web",
+        "resourceType": "Microsoft.Web/sites/config"
+      },
+      {
+        "dependsOn": [
+          {
+            "id": "/subscriptions/c541911a-3688-4094-8f3e-57bb2bbffce2/resourceGroups/rg-wordpress-fc/providers/Microsoft.Web/sites/as-wordpress-fc-001",
+            "resourceGroup": "rg-wordpress-fc",
+            "resourceName": "as-wordpress-fc-001",
+            "resourceType": "Microsoft.Web/sites"
+          }
+        ],
+        "id": "/subscriptions/c541911a-3688-4094-8f3e-57bb2bbffce2/resourceGroups/rg-wordpress-fc/providers/Microsoft.Web/sites/as-wordpress-fc-001/deployments/8e38b2f9-4ebe-46a7-b8ce-f0f13b368180",
+        "resourceGroup": "rg-wordpress-fc",
+        "resourceName": "as-wordpress-fc-001/8e38b2f9-4ebe-46a7-b8ce-f0f13b368180",
+        "resourceType": "Microsoft.Web/sites/deployments"
+      },
+      {
+        "dependsOn": [
+          {
+            "id": "/subscriptions/c541911a-3688-4094-8f3e-57bb2bbffce2/resourceGroups/rg-wordpress-fc/providers/Microsoft.Web/sites/as-wordpress-fc-001",
+            "resourceGroup": "rg-wordpress-fc",
+            "resourceName": "as-wordpress-fc-001",
+            "resourceType": "Microsoft.Web/sites"
+          }
+        ],
+        "id": "/subscriptions/c541911a-3688-4094-8f3e-57bb2bbffce2/resourceGroups/rg-wordpress-fc/providers/Microsoft.Web/sites/as-wordpress-fc-001/virtualNetworkConnections/45d8b9ac-6629-475e-b61c-fc28d5c0b0b9_subnet0",
+        "resourceGroup": "rg-wordpress-fc",
+        "resourceName": "as-wordpress-fc-001/45d8b9ac-6629-475e-b61c-fc28d5c0b0b9_subnet0",
+        "resourceType": "Microsoft.Web/sites/virtualNetworkConnections"
+      }
+    ],
+    "diagnostics": null,
+    "duration": "PT1M56.7738715S",
+    "error": null,
+    "extensions": null,
+    "mode": "Incremental",
+    "onErrorDeployment": null,
+    "outputResources": [
+      {
+        "apiVersion": null,
+        "extension": null,
+        "id": "/subscriptions/c541911a-3688-4094-8f3e-57bb2bbffce2/resourceGroups/rg-wordpress-fc/providers/Microsoft.Web/sites/as-wordpress-fc-001",
+        "identifiers": null,
+        "resourceGroup": "rg-wordpress-fc",
+        "resourceType": null
+      },
+      {
+        "apiVersion": null,
+        "extension": null,
+        "id": "/subscriptions/c541911a-3688-4094-8f3e-57bb2bbffce2/resourceGroups/rg-wordpress-fc/providers/Microsoft.Web/sites/as-wordpress-fc-001/basicPublishingCredentialsPolicies/ftp",
+        "identifiers": null,
+        "resourceGroup": "rg-wordpress-fc",
+        "resourceType": null
+      },
+      {
+        "apiVersion": null,
+        "extension": null,
+        "id": "/subscriptions/c541911a-3688-4094-8f3e-57bb2bbffce2/resourceGroups/rg-wordpress-fc/providers/Microsoft.Web/sites/as-wordpress-fc-001/basicPublishingCredentialsPolicies/scm",
+        "identifiers": null,
+        "resourceGroup": "rg-wordpress-fc",
+        "resourceType": null
+      },
+      {
+        "apiVersion": null,
+        "extension": null,
+        "id": "/subscriptions/c541911a-3688-4094-8f3e-57bb2bbffce2/resourceGroups/rg-wordpress-fc/providers/Microsoft.Web/sites/as-wordpress-fc-001/config/web",
+        "identifiers": null,
+        "resourceGroup": "rg-wordpress-fc",
+        "resourceType": null
+      },
+      {
+        "apiVersion": null,
+        "extension": null,
+        "id": "/subscriptions/c541911a-3688-4094-8f3e-57bb2bbffce2/resourceGroups/rg-wordpress-fc/providers/Microsoft.Web/sites/as-wordpress-fc-001/deployments/8e38b2f9-4ebe-46a7-b8ce-f0f13b368180",
+        "identifiers": null,
+        "resourceGroup": "rg-wordpress-fc",
+        "resourceType": null
+      },
+      {
+        "apiVersion": null,
+        "extension": null,
+        "id": "/subscriptions/c541911a-3688-4094-8f3e-57bb2bbffce2/resourceGroups/rg-wordpress-fc/providers/Microsoft.Web/sites/as-wordpress-fc-001/virtualNetworkConnections/45d8b9ac-6629-475e-b61c-fc28d5c0b0b9_subnet0",
+        "identifiers": null,
+        "resourceGroup": "rg-wordpress-fc",
+        "resourceType": null
+      }
+    ],
+    "outputs": null,
+    "parameters": {
+      "serverfarms_as_wordpress_ASP_001_externalid": {
+        "type": "String",
+        "value": "/subscriptions/c541911a-3688-4094-8f3e-57bb2bbffce2/resourceGroups/rg-wordpress-fc/providers/Microsoft.Web/serverfarms/as-wordpress-ASP-001-2"
+      },
+      "virtualNetworks_vnet_wordpress_sc_externalid": {
+        "type": "String",
+        "value": "/subscriptions/c541911a-3688-4094-8f3e-57bb2bbffce2/resourceGroups/rg-wordpress-fc/providers/Microsoft.Network/virtualNetworks/vnet-wordpress-fc"
+      }
+    },
+    "parametersLink": null,
+    "providers": [
+      {
+        "id": null,
+        "namespace": "Microsoft.Web",
+        "providerAuthorizationConsentState": null,
+        "registrationPolicy": null,
+        "registrationState": null,
+        "resourceTypes": [
+          {
+            "aliases": null,
+            "apiProfiles": null,
+            "apiVersions": null,
+            "capabilities": null,
+            "defaultApiVersion": null,
+            "locationMappings": null,
+            "locations": [
+              "francecentral"
+            ],
+            "properties": null,
+            "resourceType": "sites",
+            "zoneMappings": null
+          },
+          {
+            "aliases": null,
+            "apiProfiles": null,
+            "apiVersions": null,
+            "capabilities": null,
+            "defaultApiVersion": null,
+            "locationMappings": null,
+            "locations": [
+              "francecentral"
+            ],
+            "properties": null,
+            "resourceType": "sites/basicPublishingCredentialsPolicies",
+            "zoneMappings": null
+          },
+          {
+            "aliases": null,
+            "apiProfiles": null,
+            "apiVersions": null,
+            "capabilities": null,
+            "defaultApiVersion": null,
+            "locationMappings": null,
+            "locations": [
+              "francecentral"
+            ],
+            "properties": null,
+            "resourceType": "sites/config",
+            "zoneMappings": null
+          },
+          {
+            "aliases": null,
+            "apiProfiles": null,
+            "apiVersions": null,
+            "capabilities": null,
+            "defaultApiVersion": null,
+            "locationMappings": null,
+            "locations": [
+              "francecentral"
+            ],
+            "properties": null,
+            "resourceType": "sites/deployments",
+            "zoneMappings": null
+          },
+          {
+            "aliases": null,
+            "apiProfiles": null,
+            "apiVersions": null,
+            "capabilities": null,
+            "defaultApiVersion": null,
+            "locationMappings": null,
+            "locations": [
+              "francecentral"
+            ],
+            "properties": null,
+            "resourceType": "sites/virtualNetworkConnections",
+            "zoneMappings": null
+          }
+        ]
+      }
+    ],
+    "provisioningState": "Succeeded",
+    "templateHash": "15277704307250800792",
+    "templateLink": null,
+    "timestamp": "2025-09-17T12:13:40.304149+00:00",
+    "validatedResources": null,
+    "validationLevel": null
+  },
+  "resourceGroup": "rg-wordpress-fc",
+  "tags": null,
+  "type": "Microsoft.Resources/deployments"
+}

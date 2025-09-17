@@ -195,19 +195,6 @@
         "[resourceId('Microsoft.Web/sites', 'as-wordpress-fc-001')]"
       ],
       "location": "France Central",
-      "name": "as-wordpress-fc-001/as-wordpress-fc-001-e3hmb0gvbqabbmf7.spaincentral-01.azurewebsites.net",
-      "properties": {
-        "hostNameType": "Verified",
-        "siteName": "as-wordpress-fc-001"
-      },
-      "type": "Microsoft.Web/sites/hostNameBindings"
-    },
-    {
-      "apiVersion": "2024-11-01",
-      "dependsOn": [
-        "[resourceId('Microsoft.Web/sites', 'as-wordpress-fc-001')]"
-      ],
-      "location": "France Central",
       "name": "as-wordpress-fc-001/45d8b9ac-6629-475e-b61c-fc28d5c0b0b9_subnet0",
       "properties": {
         "isSwift": true,
