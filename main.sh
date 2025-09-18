@@ -39,7 +39,7 @@ for i in $(seq 0 $((count-1))); do
   echo "  oldSqlServerName: $oldSqlServerName"
   echo "  newSubscriptionName: $newSubscriptionName"
   echo "  newResourceGroup: $newResourceGroup"
-  echo "  newAppServiceName: $newAppServiceName"
+  echo "  newAppServiceName: $newAppServiceName-APP01"
   echo "  newSqlServerName: $newSqlServerName"
   echo "  newAppServiceSubnet: $newAppServiceSubnet"
   echo "  dbPassword: $dbPassword"

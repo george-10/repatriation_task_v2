@@ -52,6 +52,7 @@ lftp -u "$username","$password" "$host" -e "
   set ftp:ssl-force true;
   set ftp:ssl-protect-data true;
   set ftp:passive-mode true;
+  set ssl:verify-certificate no;
   set net:max-retries 2;
   set net:timeout 30;
   mirror --verbose --continue --parallel=4 /site/wwwroot $WDIR/wwwroot;

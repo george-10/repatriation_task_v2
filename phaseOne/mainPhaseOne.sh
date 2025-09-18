@@ -13,11 +13,11 @@ resourceGroup=$1
 appServiceName=$2
 mysqlServerName=$3
 dbPassword=$4
-appServicePlanName=$(az webapp show \
+appServicePlanName="$(az webapp show \
   --resource-group $resourceGroup \
   --name $appServiceName \
   --query appServicePlanId -o tsv | awk -F/ '{print $NF}'
-)
+)"
 
 echo $appServicePlanName > $WDIR/appServicePlanName.txt
 

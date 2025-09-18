@@ -7,7 +7,7 @@
 
     "newSubscriptionName": "x",
     "newResourceGroup": "rg-wordpress-fc",
-    "newAppServiceName": "as-wordpress-fc-001",
+    "newAppServiceName": "as-wordpress-fc",
     "newSqlServerName": "fs-wordpressdummy-fc",
     "newAppServiceSubnet": "subnet0",
 

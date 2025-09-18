@@ -11,13 +11,13 @@ oldSubscriptionName=$(jq -r '.oldSubscriptionName' input.json)
 oldResourceGroup=$(jq -r '.oldResourceGroup' input.json)
 newSubscriptionName=$(jq -r '.newSubscriptionName' input.json)
 newResourceGroup=$(jq -r '.newResourceGroup' input.json)
-newAppServiceName=$(jq -r '.newAppServiceName' input.json)
+newAppServiceName="$(jq -r '.newAppServiceName' input.json)-APP01"
 newSqlServerName=$(jq -r '.newSqlServerName' input.json)
 newAppServiceSubnet=$(jq -r '.newAppServiceSubnet' input.json)
 dbPassword=$(jq -r '.dbPassword' input.json)
 
 appServicePlanName=$(cat $WDIR/appServicePlanName.txt)
-newAppServicePlanName="$appServicePlanName-2"
+newAppServicePlanName="$(jq -r '.newAppServiceName' input.json)-ASP01"
 if jq -e 'has("oldAppServiceName")' input.json > /dev/null; then
   oldAppServiceName=$(jq -r '.oldAppServiceName' input.json)
 else
