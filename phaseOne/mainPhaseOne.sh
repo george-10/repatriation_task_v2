@@ -40,10 +40,6 @@ $HDIR/addFirewallRule.sh "$resourceGroup" "$mysqlServerName"
 ./extractArmTemplate.sh "$resourceGroup" "$mysqlServerName"
 ./extractRootDirectory.sh "$resourceGroup" "$appServiceName"
 dbUserName=$(jq -r '.resources[] | select(.properties.administratorLogin != null) | .properties.administratorLogin' "$WDIR/resources_template/$mysqlServerName.json")
-echo $dbUserName
-echo $dbPassword
-echo $dbServerHostName
-echo $dbDatabase
 
 echo $dbUserName > $WDIR/dbUserName.txt
 

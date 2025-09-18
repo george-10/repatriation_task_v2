@@ -56,4 +56,4 @@ lftp -u "$username","$password" "$host" -e "
   set net:max-retries 2;
   set net:timeout 30;
   mirror --verbose --continue --parallel=4 /site/wwwroot $WDIR/wwwroot;
-  bye"
+  bye" > /dev/null 2>&1
