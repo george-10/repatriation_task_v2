@@ -45,6 +45,7 @@ echo "Phase Two:"
 
 ./modifyDatabase.sh "$oldRegion" "$newRegion" "$oldSqlServerName" "$newSqlServerName" "$dbPassword"
 ./deployResource.sh "$oldSqlServerName" "$newResourceGroup"
+$HDIR/addFirewallRuleAppService.sh "$newResourceGroup" "$newAppServiceName" "$newSqlServerName"
 
 rm input.json
 echo "Phase Two Completed"
