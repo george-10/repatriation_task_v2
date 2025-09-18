@@ -11,7 +11,7 @@ appServiceName=$2
 subnetName=$(az webapp show \
   --name "$appServiceName" \
   --resource-group "$resourceGroup" \
-  --query properties.virtualNetworkSubnetId \
+  --query virtualNetworkSubnetId \
   -o tsv | awk -F/ '{print $NF}')
 
 echo "$subnetName"

@@ -1,0 +1,12 @@
+{
+  "oldSubscriptionName": "x",
+  "oldResourceGroup": "rg-wordpress-sc",
+  "oldAppServiceName": "as-wordpress-sc-001",
+  "oldSqlServerName": "fs-wordperssdummy-sc",
+  "newSubscriptionName": "x",
+  "newResourceGroup": "rg-wordpress-fc",
+  "newAppServiceName": "as-wordpress-fc",
+  "newSqlServerName": "fs-wordpressdummy-fc",
+  "newAppServiceSubnet": "subnet1",
+  "dbPassword": "Standard@123"
+}

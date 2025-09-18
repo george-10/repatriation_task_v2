@@ -50,6 +50,6 @@ echo $dbUserName > $WDIR/dbUserName.txt
 ./extractSqlDump.sh $dbUserName $dbDatabase $dbPassword $dbServerHostName
 
 $HDIR/getRegion.sh $resourceGroup > $WDIR/oldRegion.txt
-$($HDIR/getAppServiceSubnet.sh "$resourceGroup" "$appServiceName") > $WDIR/oldSubnetName.txt
+$HDIR/getAppServiceSubnet.sh "$resourceGroup" "$appServiceName" > $WDIR/oldSubnetName.txt
 $HDIR/removeFirewallRule.sh "$resourceGroup" "$mysqlServerName"
 echo "Phase One Completed"
