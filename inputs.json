@@ -9,7 +9,7 @@
     "newResourceGroup": "rg-wordpress-fc",
     "newAppServiceName": "as-wordpress-fc",
     "newSqlServerName": "fs-wordpressdummy-fc",
-    "newAppServiceSubnet": "subnet0",
+    "newAppServiceSubnet": "subnet1",
 
     "dbPassword": "Standard@123"
   }

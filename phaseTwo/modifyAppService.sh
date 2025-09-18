@@ -1,7 +1,7 @@
 #!/bin/bash
 
-if [ $# -ne 5 ]; then
-  echo "Usage: $0 <old-region> <new-region> <old-name> <new-name> <resource-group>"
+if [ $# -ne 7 ]; then
+  echo "Usage: $0 <old-region> <new-region> <old-name> <new-name> <old-subnet-name> <new-subnet-name> <resource-group>"
   exit 1
 fi
 
@@ -12,7 +12,9 @@ oldRegion=$1
 newRegion=$2
 oldName=$3
 newName=$4
-resourceGroup=$5
+oldSubnet=$5
+newSubnet=$6
+resourceGroup=$7
 
 echo "Modify App Service Plan"
 
@@ -38,3 +40,4 @@ jq --arg id "$($HDIR/getVnetId.sh $resourceGroup)" \
 
 $HDIR/swapValues.sh "$oldRegion" "$newRegion" $WDIR/resources_template/$oldName.json
 $HDIR/swapValues.sh "$oldName" "$newName" $WDIR/resources_template/$oldName.json
+$HDIR/swapValues.sh "$oldSubnet" "$newSubnet" $WDIR/resources_template/$oldName.json
