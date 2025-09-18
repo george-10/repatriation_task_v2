@@ -58,7 +58,6 @@ for i in $(seq 0 $((count-1))); do
   cd $DIR
 
   rm ./input.json
-  rm -rf ./_work
 done
 
 cd "$HOME"
