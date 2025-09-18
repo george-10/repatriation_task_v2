@@ -6,18 +6,18 @@ HDIR="$HOME/repatriationTask/helperFunctions"
 WDIR="$HOME/repatriationTask/_work"
 
 mkdir -p $WDIR/resources
-
+appServiceName=$(jq -r '.newAppServiceName' input.json)
 oldSubscriptionName=$(jq -r '.oldSubscriptionName' input.json)
 oldResourceGroup=$(jq -r '.oldResourceGroup' input.json)
 newSubscriptionName=$(jq -r '.newSubscriptionName' input.json)
 newResourceGroup=$(jq -r '.newResourceGroup' input.json)
-newAppServiceName="$(jq -r '.newAppServiceName' input.json)-APP01"
+newAppServiceName="$appServiceName-APP01"
 newSqlServerName=$(jq -r '.newSqlServerName' input.json)
 newAppServiceSubnet=$(jq -r '.newAppServiceSubnet' input.json)
 dbPassword=$(jq -r '.dbPassword' input.json)
 
 appServicePlanName=$(cat $WDIR/appServicePlanName.txt)
-newAppServicePlanName="$(jq -r '.newAppServiceName' input.json)-ASP01"
+newAppServicePlanName="$appServiceName-ASP01"
 if jq -e 'has("oldAppServiceName")' input.json > /dev/null; then
   oldAppServiceName=$(jq -r '.oldAppServiceName' input.json)
 else
@@ -35,7 +35,7 @@ fi
 
 oldRegion=$(cat $WDIR/oldRegion.txt)
 newRegion=$($HDIR/getRegion.sh "$newResourceGroup")
-oldAppServiceSubnet=$($HDIR/getAppServiceSubnet.sh "$newResourceGroup" "$newAppServiceName")
+oldAppServiceSubnet=$(cat $WDIR/oldSubnetName.txt)
 
 echo "Phase Two:"
 ./modifyAppServicePlan.sh "$oldRegion" "$newRegion" "$appServicePlanName" "$newAppServicePlanName"
