@@ -22,13 +22,6 @@ password=$(az webapp deployment list-publishing-profiles \
   --query "[?publishMethod=='FTP'].[userPWD]" \
   -o tsv)
 
-ftpsUrl=$(az webapp deployment list-publishing-profiles \
-  --name "$appName" \
-  --resource-group "$rgName" \
-  --query "[?publishMethod=='FTP'].[publishUrl]" \
-  -o tsv)
-
-host=$(echo "$ftpsUrl" | sed -E 's|^ftps://([^/]+)/.*|\1|')
 
 mkdir -p "$WDIR/urls"
 [ -f $WDIR/urls/old_url.env ] && rm $WDIR/urls/old_url.env
@@ -40,20 +33,24 @@ appUrl=$(az webapp show \
   --query "defaultHostName" \
   -o tsv)
 
+scm_url=$(echo "$appUrl" | awk -F'.' '{print $1 ".scm." $2 "." $3 "." $4}')
+scm_url="https://$scm_url/api/zip/site/wwwroot/"
+
+
 echo "export OLD_URL=${appUrl}" > $WDIR/urls/old_url.env
 
 echo "OLD_URL set to ${appUrl}"
 
 echo "Connecting to App Service: $appName"
-echo "Host: $host"
-echo "User: $username"
+echo "URL: $scm_url"
+echo "User: $appName"
 echo "Password: $password"
-lftp -u "$username","$password" "$host" -e "
-  set ftp:ssl-force true;
-  set ftp:ssl-protect-data true;
-  set ftp:passive-mode true;
-  set ssl:verify-certificate no;
-  set net:max-retries 2;
-  set net:timeout 30;
-  mirror --verbose --continue --parallel=4 /site/wwwroot $WDIR/wwwroot;
-  bye" > /dev/null 2>&1
+
+cred="\$$appName:$password"
+echo "Credentials: $cred"
+
+curl -u "$cred" -o $WDIR/wwwrootzip.zip $scm_url
+
+echo "Unzipping the wwwroot: "
+
+unzip $WDIR/wwwrootzip.zip -d $WDIR/wwwroot
