@@ -34,7 +34,7 @@ for i in $(seq 0 $((count-1))); do
   newAppServiceSubnet=$(jq -r '.newAppServiceSubnet' input.json)
   keyVaultName=$(jq -r '.keyVaultName' input.json)
   secretName=$(jq -r '.secretName' input.json)
-  dbPassword=$(az keyvault secret show --vault-name $keyValutName --name $secretName --query value -o tsv)
+  dbPassword=$(az keyvault secret show --vault-name $keyVaultName --name $secretName --query value -o tsv)
 
   if jq -e 'has("oldAppServiceName")' input.json > /dev/null; then
     oldAppServiceName=$(jq -r '.oldAppServiceName' input.json)
@@ -60,7 +60,7 @@ for i in $(seq 0 $((count-1))); do
   echo "  New App Service:    ${newAppServiceName}-APP01"
   echo "  New SQL Server:     $newSqlServerName"
   echo "  New App Service Subnet: $newAppServiceSubnet"
-  echo "  Database Password:  $dbPassword"
+#  echo "  Database Password:  $dbPassword"
 
   az account set --subscription "$oldSubscriptionName"
   cd ./phaseOne
