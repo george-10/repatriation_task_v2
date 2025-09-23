@@ -32,7 +32,9 @@ for i in $(seq 0 $((count-1))); do
   newAppServiceName=$(jq -r '.newAppServiceName' input.json)
   newSqlServerName=$(jq -r '.newSqlServerName' input.json)
   newAppServiceSubnet=$(jq -r '.newAppServiceSubnet' input.json)
-  dbPassword=$(jq -r '.dbPassword' input.json)
+  keyVaultName=$(jq -r '.keyVaultName' input.json)
+  secretName=$(jq -r '.secretName' input.json)
+  dbPassword=$(az keyvault secret show --vault-name $keyValutName --name $secretName --query value -o tsv)
 
   if jq -e 'has("oldAppServiceName")' input.json > /dev/null; then
     oldAppServiceName=$(jq -r '.oldAppServiceName' input.json)
