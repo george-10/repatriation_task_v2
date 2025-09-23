@@ -27,8 +27,9 @@ dbDatabase=$(az mysql flexible-server db list \
   --query "[?name!='information_schema' && name!='mysql' && name!='performance_schema' && name!='sys'].name" \
   -o tsv)
 dbServerHostName="$3.mysql.database.azure.com"
-
+echo "============================"
 echo "Phase One:"
+echo "============================"
 echo "Resource Group: $resourceGroup"
 echo "App Service: $appServiceName"
 echo "MySQL Server: $mysqlServerName"

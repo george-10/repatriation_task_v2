@@ -18,8 +18,9 @@ dbDatabase=$(az mysql flexible-server db list \
   -o tsv)
 dbServerHostName="$mysqlServerName.mysql.database.azure.com"
 dbUserName=$(cat $WDIR/dbUserName.txt)
-
+echo "============================"
 echo "Phase Three:"
+echo "============================"
 echo resourceGroup: $resourceGroup
 echo mysqlServerName: $mysqlServerName
 echo dbUserName: $dbUserName

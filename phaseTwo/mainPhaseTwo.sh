@@ -36,8 +36,9 @@ fi
 oldRegion=$(cat $WDIR/oldRegion.txt)
 newRegion=$($HDIR/getRegion.sh "$newResourceGroup")
 oldAppServiceSubnet=$(cat $WDIR/oldSubnetName.txt)
-
+echo "============================"
 echo "Phase Two:"
+echo "============================"
 ./modifyAppServicePlan.sh "$oldRegion" "$newRegion" "$appServicePlanName" "$newAppServicePlanName"
 ./deployResource.sh "$appServicePlanName" "$newResourceGroup"
 
