@@ -33,7 +33,7 @@ echo "Resource Group: $resourceGroup"
 echo "App Service: $appServiceName"
 echo "MySQL Server: $mysqlServerName"
 
-$HDIR/addFirewallRule.sh "$resourceGroup" "$mysqlServerName"
+#$HDIR/addFirewallRule.sh "$resourceGroup" "$mysqlServerName"
 
 ./extractArmTemplate.sh "$resourceGroup" "$appServicePlanName"
 ./extractArmTemplate.sh "$resourceGroup" "$appServiceName"
@@ -43,7 +43,7 @@ dbUserName=$(jq -r '.resources[] | select(.properties.administratorLogin != null
 
 echo $dbUserName > $WDIR/dbUserName.txt
 
-./extractSqlDump.sh $dbUserName $dbDatabase $dbPassword $dbServerHostName
+#./extractSqlDump.sh $dbUserName $dbDatabase $dbPassword $dbServerHostName
 
 $HDIR/getRegion.sh $resourceGroup > $WDIR/oldRegion.txt
 $HDIR/getAppServiceSubnet.sh "$resourceGroup" "$appServiceName" > $WDIR/oldSubnetName.txt
