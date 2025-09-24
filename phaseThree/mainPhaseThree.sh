@@ -27,7 +27,7 @@ echo dbUserName: $dbUserName
 
 echo "Getting New URL"
 
-#$HDIR/addFirewallRule.sh "$resourceGroup" "$mysqlServerName"
+$HDIR/addFirewallRule.sh "$resourceGroup" "$mysqlServerName"
 $HDIR/getNewUrl.sh $resourceGroup
 
 echo "Modifying SQL Dump and WordPress Directory"
@@ -38,5 +38,5 @@ echo "Deploying SQL Dump and WordPress Directory"
 ./deploySqlDump.sh $dbUserName $dbDatabase $dbPassword $dbServerHostName
 ./deployWordpressDirectory.sh $resourceGroup
 
-#$HDIR/removeFirewallRule.sh "$resourceGroup" "$mysqlServerName"
+$HDIR/removeFirewallRule.sh "$resourceGroup" "$mysqlServerName"
 echo -e "\n\nPhase Three Completed\n\n"

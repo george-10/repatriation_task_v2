@@ -67,7 +67,7 @@ for i in $(seq 0 $((count-1))); do
 
   echo "Setting subscription to $oldSubscriptionName ..."
   az account set --subscription "$oldSubscriptionName"
-  echo "Subscription set to $oldSubscriptionName \n"
+  echo -e "Subscription set to $oldSubscriptionName \n"
 
   cd ./phaseOne
   ./mainPhaseOne.sh $oldResourceGroup $oldAppServiceName $oldSqlServerName $dbPassword
@@ -96,7 +96,7 @@ for i in $(seq 0 $((count-1))); do
   echo -e "Cleanup completed.\n"
   echo "-----------------------------------------------------------------"
   echo "Iteration $i completed."
-  echo -e"-----------------------------------------------------------------\n"
+  echo -e "-----------------------------------------------------------------\n"
 done
 
 cd "$HOME"
