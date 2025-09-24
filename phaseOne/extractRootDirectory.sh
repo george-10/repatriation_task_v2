@@ -56,4 +56,4 @@ echo "Unzipping the wwwroot: "
 
 unzip $WDIR/wwwrootzip.zip -d $WDIR/wwwroot
 
-echo "Unzipping completed. Files are in $WDIR/wwwroot\n"
+echo -e "Unzipping completed. Files are in $WDIR/wwwroot\n"

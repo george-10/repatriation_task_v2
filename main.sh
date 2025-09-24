@@ -25,7 +25,7 @@ for i in $(seq 0 $((count-1))); do
   jq ".[$i]" "$INPUTS" > "input.json"
   echo "-----------------------------------------------------------------"
   echo "Starting iteration $i"
-  echo "-----------------------------------------------------------------"
+  echo -e "-----------------------------------------------------------------\n"
   echo "Input file created for iteration $i."
 
   oldSubscriptionName=$(jq -r '.oldSubscriptionName' input.json)
@@ -76,7 +76,7 @@ for i in $(seq 0 $((count-1))); do
 
   echo "Setting subscription to $newSubscriptionName ..." 
   az account set --subscription "$newSubscriptionName"
-  echo "Subscription set to $newSubscriptionName \n"
+  echo -e "Subscription set to $newSubscriptionName \n"
 
   cp ./input.json ./phaseTwo
   cd ./phaseTwo
@@ -84,7 +84,7 @@ for i in $(seq 0 $((count-1))); do
   cd $DIR
   confirm_if_required
 
-  echo "\n"
+  echo -e "\n"
   cd ./phaseThree
   ./mainPhaseThree.sh $newResourceGroup $newSqlServerName $dbPassword
   cd $DIR
@@ -93,10 +93,10 @@ for i in $(seq 0 $((count-1))); do
   echo "Cleaning up ..."
   rm ./input.json
   rm -rf ./_work
-  echo "Cleanup completed.\n"
+  echo -e "Cleanup completed.\n"
   echo "-----------------------------------------------------------------"
-  echo "Iteration $i completed.\n"
-  echo "-----------------------------------------------------------------"
+  echo "Iteration $i completed."
+  echo -e"-----------------------------------------------------------------\n"
 done
 
 cd "$HOME"

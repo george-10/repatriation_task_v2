@@ -18,15 +18,15 @@ ids=$(az resource list --resource-group "$RG" --query "[?name=='$RN'].id" -o tsv
 n=$(printf "%s\n" "$ids" | grep -c . || true)
 
 if [ "$n" -eq 0 ]; then
-  echo "No resource named '$RN' found in resource group '$RG'. \n"
+  echo -e "No resource named '$RN' found in resource group '$RG'. \n"
   exit 1
 elif [ "$n" -gt 1 ]; then
   echo "Two or more resources named '$RN' in '$RG':"
   printf "%s\n" "$ids"
-  echo "Cannot proceed. \n"
+  echo -e "Cannot proceed. \n"
   exit 1
 fi
 
 echo $(az group export --name "$RG" --resource-ids $ids --skip-resource-name-params) > $WDIR/resources_template/$RN.json
 
-echo "Template extracted to $WDIR/resources_template/$RN.json \n"
+echo -e "Template extracted to $WDIR/resources_template/$RN.json \n"

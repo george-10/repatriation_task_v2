@@ -17,8 +17,8 @@ export MYSQL_PWD="$pass"
 mysqldump -h "$host" -u "$user" --databases "$database" > $WDIR/dump.sql
 
 if [ $? -eq 0 ]; then
-    echo "Import completed successfully \n"
+    echo -e "Import completed successfully \n"
 else
-    echo "Import failed \n"
+    echo -e "Import failed \n"
     exit 1
 fi

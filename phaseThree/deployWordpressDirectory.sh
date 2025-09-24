@@ -22,8 +22,8 @@ az webapp deploy \
     --type zip
 
 if [ $? -eq 0 ]; then
-    echo "Deployment succeeded\n"
+    echo -e "Deployment succeeded\n"
 else
-    echo "Deployment failed\n"
+    echo -e "Deployment failed\n"
     exit 1
 fi
