@@ -2,6 +2,11 @@
 
 set -e
 
+if [ "$#" -ne 1 ]; then
+  echo "Usage: $0 <db-password>";
+  exit 1;
+fi
+
 HDIR="$HOME/repatriationTask/helperFunctions"
 WDIR="$HOME/repatriationTask/_work"
 
@@ -14,7 +19,7 @@ newResourceGroup=$(jq -r '.newResourceGroup' input.json)
 newAppServiceName="$appServiceName-APP01"
 newSqlServerName=$(jq -r '.newSqlServerName' input.json)
 newAppServiceSubnet=$(jq -r '.newAppServiceSubnet' input.json)
-dbPassword=$(jq -r '.dbPassword' input.json)
+dbPassword=$1
 
 appServicePlanName=$(cat $WDIR/appServicePlanName.txt)
 newAppServicePlanName="$appServiceName-ASP01"

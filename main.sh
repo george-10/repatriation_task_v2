@@ -80,7 +80,7 @@ for i in $(seq 0 $((count-1))); do
 
   cp ./input.json ./phaseTwo
   cd ./phaseTwo
-  ./mainPhaseTwo.sh
+  ./mainPhaseTwo.sh $dbPassword
   cd $DIR
   confirm_if_required
 
