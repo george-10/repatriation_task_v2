@@ -93,6 +93,7 @@ for i in $(seq 0 $((count-1))); do
   echo "Cleaning up ..."
   rm ./input.json
   rm -rf ./_work
+  echo "_work deleted. input.json for iteration $i deleted."
   echo -e "Cleanup completed.\n"
   echo "-----------------------------------------------------------------"
   echo "Iteration $i completed."
