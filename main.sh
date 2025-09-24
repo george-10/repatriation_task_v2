@@ -23,6 +23,9 @@ confirm_if_required() {
 for i in $(seq 0 $((count-1))); do
   mkdir -p ./_work
   jq ".[$i]" "$INPUTS" > "input.json"
+  echo "-----------------------------------------------------------------"
+  echo "Starting iteration $i"
+  echo "-----------------------------------------------------------------"
   echo "Input file created for iteration $i."
 
   oldSubscriptionName=$(jq -r '.oldSubscriptionName' input.json)
@@ -62,27 +65,38 @@ for i in $(seq 0 $((count-1))); do
   echo "  New App Service Subnet: $newAppServiceSubnet"
 #  echo "  Database Password:  $dbPassword"
 
+  echo "Setting subscription to $oldSubscriptionName ..."
   az account set --subscription "$oldSubscriptionName"
+  echo "Subscription set to $oldSubscriptionName \n"
+
   cd ./phaseOne
   ./mainPhaseOne.sh $oldResourceGroup $oldAppServiceName $oldSqlServerName $dbPassword
   cd $DIR
   confirm_if_required
 
+  echo "Setting subscription to $newSubscriptionName ..." 
   az account set --subscription "$newSubscriptionName"
+  echo "Subscription set to $newSubscriptionName \n"
+
   cp ./input.json ./phaseTwo
   cd ./phaseTwo
   ./mainPhaseTwo.sh
   cd $DIR
   confirm_if_required
 
+  echo "\n"
   cd ./phaseThree
   ./mainPhaseThree.sh $newResourceGroup $newSqlServerName $dbPassword
   cd $DIR
   confirm_if_required
 
+  echo "Cleaning up ..."
   rm ./input.json
   rm -rf ./_work
-  echo "Iteration $i completed."
+  echo "Cleanup completed.\n"
+  echo "-----------------------------------------------------------------"
+  echo "Iteration $i completed.\n"
+  echo "-----------------------------------------------------------------"
 done
 
 cd "$HOME"

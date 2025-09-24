@@ -12,13 +12,15 @@ database=$2
 pass=$3
 host=$4
 
+echo "Deploying SQL Dump to database $database on host $host with user $user ..."
+
 export MYSQL_PWD="$pass"
 
 mysql -h "$host" -u "$user" "$database" < $WDIR/dump.sql
 
 if [ $? -eq 0 ]; then
-    echo "Export completed successfully"
+    echo "Export completed successfully\n"
 else
-    echo "Export failed"
+    echo "Export failed\n"
     exit 1
 fi

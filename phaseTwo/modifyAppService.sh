@@ -16,6 +16,14 @@ oldSubnet=$5
 newSubnet=$6
 resourceGroup=$7
 
+echo "Modifying App Service template $oldName.json ..."
+echo "Old Region: $oldRegion"
+echo "New Region: $newRegion" 
+echo "Old Name: $oldName"
+echo "New Name: $newName"
+echo "Old Subnet: $oldSubnet"
+echo "New Subnet: $newSubnet"
+echo "Resource Group: $resourceGroup"
 
 jq '(.resources[] | select(.type == "Microsoft.Web/sites") | .properties) |= del(.hostNameSslStates)' \
    $WDIR/resources_template/$oldName.json > tmp.json && mv tmp.json $WDIR/resources_template/$oldName.json
@@ -31,7 +39,6 @@ jq --arg id "$appServicePlanId" \
 
 
 vnetId="$($HDIR/getVnetId.sh $resourceGroup)"
-echo "VNet ID: $vnetId"
 jq --arg id "$vnetId" \
   '.parameters |= with_entries(
       if (.key | test("^virtualNetworks_.*_externalid$"))
@@ -48,5 +55,7 @@ $HDIR/swapValues.sh "$oldName" "$newName" $WDIR/resources_template/$oldName.json
 
 
 $HDIR/swapValues.sh "$oldSubnet" "$newSubnet" $WDIR/resources_template/$oldName.json
+
+echo "Modification complete.\n"
 
 

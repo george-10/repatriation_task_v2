@@ -22,6 +22,7 @@ password=$(az webapp deployment list-publishing-profiles \
   --query "[?publishMethod=='FTP'].[userPWD]" \
   -o tsv)
 
+echo "Extracting wwwroot from App Service: $appName ..."
 
 mkdir -p "$WDIR/urls"
 [ -f $WDIR/urls/old_url.env ] && rm $WDIR/urls/old_url.env
@@ -54,3 +55,5 @@ curl -u "$cred" -o $WDIR/wwwrootzip.zip $scm_url
 echo "Unzipping the wwwroot: "
 
 unzip $WDIR/wwwrootzip.zip -d $WDIR/wwwroot
+
+echo "Unzipping completed. Files are in $WDIR/wwwroot\n"

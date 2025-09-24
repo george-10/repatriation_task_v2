@@ -29,10 +29,7 @@ dbDatabase=$(az mysql flexible-server db list \
 dbServerHostName="$3.mysql.database.azure.com"
 echo "============================"
 echo "Phase One:"
-echo "============================"
-echo "Resource Group: $resourceGroup"
-echo "App Service: $appServiceName"
-echo "MySQL Server: $mysqlServerName"
+echo "============================\n\n"
 
 #$HDIR/addFirewallRule.sh "$resourceGroup" "$mysqlServerName"
 
@@ -49,4 +46,4 @@ echo $dbUserName > $WDIR/dbUserName.txt
 $HDIR/getRegion.sh $resourceGroup > $WDIR/oldRegion.txt
 $HDIR/getAppServiceSubnet.sh "$resourceGroup" "$appServiceName" > $WDIR/oldSubnetName.txt
 #$HDIR/removeFirewallRule.sh "$resourceGroup" "$mysqlServerName"
-echo "Phase One Completed"
+echo "\n\nPhase One Completed\n\n"

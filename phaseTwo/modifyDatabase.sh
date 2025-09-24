@@ -10,6 +10,13 @@ oldName=$3
 newName=$4
 dbPassword=$5
 
+echo "Modifying Database template $oldName.json ..."
+echo "Old Region: $oldRegion"
+echo "New Region: $newRegion"
+echo "Old Name: $oldName"
+echo "New Name: $newName"
+echo "DB Password: [HIDDEN]"
+
 $HDIR/swapValues.sh "$oldRegion" "$newRegion" $WDIR/resources_template/$oldName.json
 $HDIR/swapValues.sh "$oldName" "$newName" $WDIR/resources_template/$oldName.json
 
@@ -78,3 +85,4 @@ jq '(.resources[]
     | .properties) |= del(.databasePort)' \
 "$WDIR/resources_template/$oldName.json" > tmp.json && mv tmp.json "$WDIR/resources_template/$oldName.json"
 
+echo "Modification complete.\n"

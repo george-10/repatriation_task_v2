@@ -16,15 +16,15 @@ ResourceGrp=$1
 DB_HOST_NEW=$(az mysql flexible-server list \
   --resource-group $ResourceGrp \
   --query "[0].fullyQualifiedDomainName" -o tsv)
-
+echo "Modifying wp-config.php with new DB_HOST: $DB_HOST_NEW ..."
 
 sed -i "s/\(define( 'DB_HOST', *'\)[^']*\(' );\)/\1${DB_HOST_NEW}\2/" $CONFIG_FILE
 
-echo "wp-config.php updated successfully!"
+echo "wp-config.php updated successfully! /n"
 echo "creating zip file"
 
 cd $WDIR/wwwroot
 zip -qr "wordpress.zip" *
 mv wordpress.zip ./..
 cd $DIR
-echo "zip success"
+echo "zip file created successfully/n"

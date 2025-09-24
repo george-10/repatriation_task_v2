@@ -38,7 +38,7 @@ newRegion=$($HDIR/getRegion.sh "$newResourceGroup")
 oldAppServiceSubnet=$(cat $WDIR/oldSubnetName.txt)
 echo "============================"
 echo "Phase Two:"
-echo "============================"
+echo "============================\n\n"
 ./modifyAppServicePlan.sh "$oldRegion" "$newRegion" "$appServicePlanName" "$newAppServicePlanName"
 ./deployResource.sh "$appServicePlanName" "$newResourceGroup"
 
@@ -50,4 +50,4 @@ echo "============================"
 $HDIR/addFirewallRuleAppservice.sh "$newResourceGroup" "$newAppServiceName" "$newSqlServerName"
 
 rm input.json
-echo "Phase Two Completed"
+echo "\n\nPhase Two Completed\n\n"

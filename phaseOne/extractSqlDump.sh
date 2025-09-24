@@ -10,13 +10,15 @@ database=$2
 pass=$3
 host=$4
 
+echo "Extracting SQL Dump from database $database on host $host with user $user ..."
+
 export MYSQL_PWD="$pass"
 
 mysqldump -h "$host" -u "$user" --databases "$database" > $WDIR/dump.sql
 
 if [ $? -eq 0 ]; then
-    echo "Import completed successfully"
+    echo "Import completed successfully \n"
 else
-    echo "Import failed"
+    echo "Import failed \n"
     exit 1
 fi

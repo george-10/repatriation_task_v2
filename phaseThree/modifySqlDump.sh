@@ -11,8 +11,8 @@ oldUrl=$(printf '%s\n' "$OLD_URL" | sed 's/[.[\*^$/]/\\&/g')
 
 newUrl=$(printf '%s\n' "$NEW_URL" | sed 's/&/\\&/g')
 
-echo "Replacing $OLD_URL with $NEW_URL"
+echo "Replacing $OLD_URL with $NEW_URL in sqldump ..."
 
 sed -i "s|$oldUrl|$newUrl|g" $WDIR/dump.sql
 
-echo "URL changed successfully"
+echo "URL changed successfully\n"

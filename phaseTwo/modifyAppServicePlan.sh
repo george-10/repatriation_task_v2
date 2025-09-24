@@ -13,7 +13,13 @@ newRegion=$2
 oldName=$3
 newName=$4
 
+echo "Modifying App Service Plan template $oldName.json ..."
+echo "Old Region: $oldRegion"
+echo "New Region: $newRegion"
+echo "Old Name: $oldName"
+echo "New Name: $newName"
+
 $HDIR/swapValues.sh "$oldRegion" "$newRegion" $WDIR/resources_template/$oldName.json
 $HDIR/swapValues.sh "$oldName" "$newName" $WDIR/resources_template/$oldName.json
 
-echo "Modified $WDIR/resources_template/$oldName.json"
+echo "Modification complete.\n"

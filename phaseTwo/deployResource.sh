@@ -14,4 +14,4 @@ resourceGroup="$2"
 echo "Deploying template of $resourceName into resource group '$resourceGroup'..."
 az deployment group create --resource-group "$resourceGroup" --template-file $WDIR/resources_template/$resourceName.json > $WDIR/resources/$resourceName.json
 
-echo "Deployment complete."
+echo "Deployment complete.\n"
