@@ -28,7 +28,7 @@ for i in $(seq 0 $((count-1))); do
   jq ".[$i]" "$INPUTS" > "input.json"
   echo "-----------------------------------------------------------------"
   echo "Starting iteration $i"
-  printf '-----------------------------------------------------------------\n'
+  echo -e '-----------------------------------------------------------------\n'
   echo "Input file created for iteration $i."
 
   oldSubscriptionName=$(jq -r '.oldSubscriptionName' input.json)
@@ -77,43 +77,43 @@ for i in $(seq 0 $((count-1))); do
 
   echo "Setting subscription to $oldSubscriptionName ..."
   az account set --subscription "$oldSubscriptionName"
-  printf "Subscription set to $oldSubscriptionName \n"
+  echo -e "Subscription set to $oldSubscriptionName \n"
 
   cd ./phaseOne
   ./mainPhaseOne.sh $oldResourceGroup $oldAppServiceName $oldSqlServerName $oldDbPassword $oldUserName
   cd $DIR
   phaseone_time=$SECONDS
-  printf "Phase One completed in $phaseone_time seconds.\n"
+  echo -e "Phase One completed in $phaseone_time seconds.\n"
   confirm_if_required
 
   echo "Setting subscription to $newSubscriptionName ..." 
   az account set --subscription "$newSubscriptionName"
-  printf "Subscription set to $newSubscriptionName \n"
+  echo -e "Subscription set to $newSubscriptionName \n"
 
   cp ./input.json ./phaseTwo
   cd ./phaseTwo
   ./mainPhaseTwo.sh $newDbPassword
   cd $DIR
   phasetwo_time=$SECONDS-$phaseone_time
-  printf "Phase Two completed in $phasetwo_time seconds.\n"
+  echo -e "Phase Two completed in $phasetwo_time seconds.\n"
   confirm_if_required
 
-  printf "\n"
+  echo -e "\n"
   cd ./phaseThree
   ./mainPhaseThree.sh $newResourceGroup $newSqlServerName $newDbPassword
   cd $DIR
   phasethree_time=$SECONDS-$phasetwo_time-$phaseone_time
-  printf "Phase Three completed in $phasethree_time seconds.\n"
+  echo -e "Phase Three completed in $phasethree_time seconds.\n"
   confirm_if_required
 
   echo "Cleaning up ..."
   rm ./input.json
   rm -rf ./_work
   echo "_work deleted. input.json for iteration $i deleted."
-  printf "Cleanup completed.\n"
+  echo -e "Cleanup completed.\n"
   echo "-----------------------------------------------------------------"
   echo "Iteration $i completed in $SECONDS seconds."
-  printf "-----------------------------------------------------------------\n"
+  echo -e "-----------------------------------------------------------------\n"
 done
 
 cd "$HOME"

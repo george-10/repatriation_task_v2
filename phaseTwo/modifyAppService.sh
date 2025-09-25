@@ -53,6 +53,6 @@ $HDIR/swapValues.sh "$oldRegion" "$newRegion" $WDIR/resources_template/$oldName.
 
 $HDIR/swapValues.sh "/subnets/$oldSubnet" "/subnets/$newSubnet" $WDIR/resources_template/$oldName.json
 
-printf "Modification complete.\n"
+echo -e "Modification complete.\n"
 
 

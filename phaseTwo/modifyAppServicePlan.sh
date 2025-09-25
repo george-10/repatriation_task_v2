@@ -22,4 +22,4 @@ echo "New Name: $newName"
 $HDIR/swapValues.sh "$oldRegion" "$newRegion" $WDIR/resources_template/$oldName.json
 $HDIR/swapValues.sh "$oldName" "$newName" $WDIR/resources_template/$oldName.json
 
-printf "Modification complete.\n"
+echo -e "Modification complete.\n"

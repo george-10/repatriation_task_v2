@@ -85,4 +85,4 @@ jq '(.resources[]
     | .properties) |= del(.databasePort)' \
 "$WDIR/resources_template/$oldName.json" > tmp.json && mv tmp.json "$WDIR/resources_template/$oldName.json"
 
-printf "Modification complete.\n"
+echo -e "Modification complete.\n"

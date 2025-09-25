@@ -20,7 +20,7 @@ dbServerHostName="$mysqlServerName.mysql.database.azure.com"
 dbUserName=$(cat $WDIR/dbUserName.txt)
 echo "============================"
 echo "Phase Three:"
-printf "============================\n\n"
+echo -e "============================\n\n"
 echo resourceGroup: $resourceGroup
 echo mysqlServerName: $mysqlServerName
 echo dbUserName: $dbUserName
@@ -39,4 +39,4 @@ echo "Deploying SQL Dump and WordPress Directory"
 ./deployWordpressDirectory.sh $resourceGroup
 
 $HDIR/removeFirewallRule.sh "$resourceGroup" "$mysqlServerName"
-printf "\n\nPhase Three Completed\n\n"
+echo -e "\n\nPhase Three Completed\n\n"
