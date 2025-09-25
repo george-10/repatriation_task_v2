@@ -10,6 +10,13 @@ fi
 rgName=$1
 appName=$2
 
+if [[ -f "$WDIR/wwwrootzip.zip" && -d "$WDIR/wwwroot"]]; then
+  echo "Root zip file and wwwroot directory already exist. Skipping extraction."
+  exit 0
+else
+  echo "Root zip file or wwwroot directory not found. Proceeding with extraction."
+fi
+
 username=$(az webapp deployment list-publishing-profiles \
   --name "$appName" \
   --resource-group "$rgName" \
@@ -56,4 +63,4 @@ echo "Unzipping the wwwroot: "
 
 unzip $WDIR/wwwrootzip.zip -d $WDIR/wwwroot
 
-echo -e "Unzipping completed. Files are in $WDIR/wwwroot\n"
+printf "Unzipping completed. Files are in $WDIR/wwwroot\n"

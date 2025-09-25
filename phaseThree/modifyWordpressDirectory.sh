@@ -20,11 +20,11 @@ echo "Modifying wp-config.php with new DB_HOST: $DB_HOST_NEW ..."
 
 sed -i "s/\(define( 'DB_HOST', *'\)[^']*\(' );\)/\1${DB_HOST_NEW}\2/" $CONFIG_FILE
 
-echo -e "wp-config.php updated successfully! \n"
+printf "wp-config.php updated successfully! \n"
 echo "creating zip file"
 
 cd $WDIR/wwwroot
 zip -qr "wordpress.zip" *
 mv wordpress.zip ./..
 cd $DIR
-echo -e "zip file created successfully \n"
+printf "zip file created successfully \n"

@@ -15,4 +15,4 @@ echo "Replacing $OLD_URL with $NEW_URL in sqldump ..."
 
 sed -i "s|$oldUrl|$newUrl|g" $WDIR/dump.sql
 
-echo -e "URL changed successfully\n"
+printf "URL changed successfully\n"

@@ -19,8 +19,8 @@ export MYSQL_PWD="$pass"
 mysql -h "$host" -u "$user" "$database" < "$WDIR/dump.sql"
 
 if [ $? -eq 0 ]; then
-    echo -e "Export completed successfully \n"
+    printf "Export completed successfully \n"
 else
-    echo -e "Export failed \n"
+    printf "Export failed \n"
     exit 1
 fi

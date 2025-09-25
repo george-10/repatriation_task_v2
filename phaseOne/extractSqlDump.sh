@@ -5,6 +5,14 @@ if [ $# -ne 4 ]; then
     exit 1
 fi
 
+if [[ -f "$WDIR/dump.sql" ]]; then
+  echo "SQL dump file already exists. Skipping extraction."
+  exit 0
+else
+  echo "SQL dump file not found. Proceeding with extraction."
+fi
+
+
 user=$1
 database=$2
 pass=$3
@@ -17,8 +25,8 @@ export MYSQL_PWD="$pass"
 mysqldump -h "$host" -u "$user" --databases "$database" > $WDIR/dump.sql
 
 if [ $? -eq 0 ]; then
-    echo -e "Import completed successfully \n"
+    printf "Import completed successfully \n"
 else
-    echo -e "Import failed \n"
+    printf "Import failed \n"
     exit 1
 fi
