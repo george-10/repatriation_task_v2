@@ -4,15 +4,16 @@ set -euo pipefail
 WDIR="$HOME/repatriationTask/_work"
 HDIR="$HOME/repatriationTask/helperFunctions"
 
-if [ $# -lt 4 ]; then
-  echo "Usage: $0 <resource-group> <app-service-name> <mysql-server-name> <db-password>"
+if [ $# -lt 5 ]; then
+  echo "Usage: $0 <resource-group> <app-service-name> <mysql-server-name> <old-db-password> <old-db-username>"
   exit 1
 fi
 
 resourceGroup=$1
 appServiceName=$2
 mysqlServerName=$3
-dbPassword=$4
+oldDbPassword=$4
+oldUsername=$5
 appServicePlanName="$(az webapp show \
   --resource-group $resourceGroup \
   --name $appServiceName \
@@ -41,7 +42,7 @@ dbUserName=$(jq -r '.resources[] | select(.properties.administratorLogin != null
 
 echo $dbUserName > $WDIR/dbUserName.txt
 
-./extractSqlDump.sh $dbUserName $dbDatabase $dbPassword $dbServerHostName
+./extractSqlDump.sh $oldUserName $dbDatabase $oldDbPassword $dbServerHostName
 
 $HDIR/getRegion.sh $resourceGroup > $WDIR/oldRegion.txt
 $HDIR/getAppServiceSubnet.sh "$resourceGroup" "$appServiceName" > $WDIR/oldSubnetName.txt

@@ -1,0 +1,19 @@
+[
+  {
+    "oldSubscriptionName": "x",
+    "oldResourceGroup": "x",
+    "oldAppServiceName": "x",
+    "oldSqlServerName": "x",
+
+    "newSubscriptionName": "x",
+    "newResourceGroup": "x",
+    "newAppServiceName": "x",
+    "newSqlServerName": "x",
+    "newAppServiceSubnet": "x",
+
+    "keyVaultName": "x",
+    "secretName": "x",
+
+    "newDbPassword":"x"
+  }
+]

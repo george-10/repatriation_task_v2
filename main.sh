@@ -35,9 +35,14 @@ for i in $(seq 0 $((count-1))); do
   newAppServiceName=$(jq -r '.newAppServiceName' input.json)
   newSqlServerName=$(jq -r '.newSqlServerName' input.json)
   newAppServiceSubnet=$(jq -r '.newAppServiceSubnet' input.json)
+  #Key Vault to get old DB password and old User name
   keyVaultName=$(jq -r '.keyVaultName' input.json)
   secretName=$(jq -r '.secretName' input.json)
-  dbPassword=$(az keyvault secret show --vault-name $keyVaultName --name $secretName --query value -o tsv)
+  oldDbPassword=$(az keyvault secret show --vault-name $keyVaultName --name $secretName --query value -o tsv)
+  oldUserName=$(az keyvault secret show --vault-name $keyVaultName --name $secretName --query "contentType")
+
+  newDbPassword=$(jq -r '.newDbPassword' input.json)
+
 
   if jq -e 'has("oldAppServiceName")' input.json > /dev/null; then
     oldAppServiceName=$(jq -r '.oldAppServiceName' input.json)
@@ -70,7 +75,7 @@ for i in $(seq 0 $((count-1))); do
   echo -e "Subscription set to $oldSubscriptionName \n"
 
   cd ./phaseOne
-  ./mainPhaseOne.sh $oldResourceGroup $oldAppServiceName $oldSqlServerName $dbPassword
+  ./mainPhaseOne.sh $oldResourceGroup $oldAppServiceName $oldSqlServerName $oldDbPassword $oldUserName
   cd $DIR
   confirm_if_required
 
@@ -80,13 +85,13 @@ for i in $(seq 0 $((count-1))); do
 
   cp ./input.json ./phaseTwo
   cd ./phaseTwo
-  ./mainPhaseTwo.sh $dbPassword
+  ./mainPhaseTwo.sh $newDbPassword
   cd $DIR
   confirm_if_required
 
   echo -e "\n"
   cd ./phaseThree
-  ./mainPhaseThree.sh $newResourceGroup $newSqlServerName $dbPassword
+  ./mainPhaseThree.sh $newResourceGroup $newSqlServerName $newDbPassword
   cd $DIR
   confirm_if_required
 
