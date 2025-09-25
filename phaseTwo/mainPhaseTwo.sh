@@ -21,7 +21,7 @@ newSqlServerName=$(jq -r '.newSqlServerName' input.json)
 newAppServiceSubnet=$(jq -r '.newAppServiceSubnet' input.json)
 dbPassword=$1
 
-appServicePlanName=$(cat $WDIR/appServicePlanName.txt)
+oldAppServicePlanName=$(cat $WDIR/appServicePlanName.txt)
 newAppServicePlanName="$appServiceName-ASP01"
 if jq -e 'has("oldAppServiceName")' input.json > /dev/null; then
   oldAppServiceName=$(jq -r '.oldAppServiceName' input.json)
@@ -44,14 +44,14 @@ oldAppServiceSubnet=$(cat $WDIR/oldSubnetName.txt)
 echo "============================"
 echo "Phase Two:"
 echo -e "============================\n\n"
-./modifyAppServicePlan.sh "$oldRegion" "$newRegion" "$appServicePlanName" "$newAppServicePlanName"
-./deployResource.sh "$appServicePlanName" "$newResourceGroup"
+./modifyAppServicePlan.sh "$oldRegion" "$newRegion" "$oldAppServicePlanName" "$newAppServicePlanName"
+./deployResource.sh "$oldAppServicePlanName" "$newResourceGroup" "$newAppServicePlanName"
 
 ./modifyAppService.sh "$oldRegion" "$newRegion" "$oldAppServiceName" "$newAppServiceName" "$oldAppServiceSubnet" "$newAppServiceSubnet" "$newResourceGroup"
-./deployResource.sh "$oldAppServiceName" "$newResourceGroup"
+./deployResource.sh "$oldAppServiceName" "$newResourceGroup" "$newAppServiceName"
 
 ./modifyDatabase.sh "$oldRegion" "$newRegion" "$oldSqlServerName" "$newSqlServerName" "$dbPassword"
-./deployResource.sh "$oldSqlServerName" "$newResourceGroup"
+./deployResource.sh "$oldSqlServerName" "$newResourceGroup" "$newSqlServerName"
 $HDIR/addFirewallRuleAppservice.sh "$newResourceGroup" "$newAppServiceName" "$newSqlServerName"
 
 rm input.json

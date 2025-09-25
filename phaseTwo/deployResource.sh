@@ -3,24 +3,25 @@ set -euo pipefail
 
 WDIR="$HOME/repatriationTask/_work"
 
-if [ "$#" -ne 2 ]; then
-  echo "Usage: $0 <resource-name> <resource-group>"
+if [ "$#" -ne 3 ]; then
+  echo "Usage: $0 <old-resource-name> <resource-group> <new-resource-name>"
   exit 1
 fi
 
 resourceName="$1"
 resourceGroup="$2"
+newResourceName="$3"
 
 result=$(az resource list \
   --resource-group "$resourceGroup" \
-  --query "[?name=='$resourceName']" \
+  --query "[?name=='$newResourceName']" \
   --output tsv)
 
 if [[ -n "$result" ]]; then
-  echo "Resource '$resourceName' already exists in resource group '$resourceGroup'. Stopping script."
+  echo "Resource '$newResourceName' already exists in resource group '$resourceGroup'. Stopping script."
   exit 0
 else
-  echo "Resource '$resourceName' not found in '$resourceGroup'. Continuing script..."
+  echo "Resource '$newResourceName' not found in '$resourceGroup'. Continuing script..."
 fi
 
 echo "Deploying template of $resourceName into resource group '$resourceGroup'..."
