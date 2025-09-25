@@ -22,7 +22,6 @@ if [ "$n" -eq 0 ]; then
   exit 1
 elif [ "$n" -gt 1 ]; then
   echo "Two or more resources named '$RN' in '$RG':"
-  echo -e "%s\n" "$ids"
   echo -e "Cannot proceed. \n"
   exit 1
 fi
