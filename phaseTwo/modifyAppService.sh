@@ -51,9 +51,7 @@ jq --arg id "$vnetId" \
 
 $HDIR/swapValues.sh "$oldRegion" "$newRegion" $WDIR/resources_template/$oldName.json
 
-
-
-$HDIR/swapValues.sh "$oldSubnet" "$newSubnet" $WDIR/resources_template/$oldName.json
+$HDIR/swapValues.sh "/subnets/$oldSubnet" "/subnets/$newSubnet" $WDIR/resources_template/$oldName.json
 
 echo -e "Modification complete.\n"
 
