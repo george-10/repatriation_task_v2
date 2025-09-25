@@ -39,4 +39,4 @@ echo "Deploying SQL Dump and WordPress Directory"
 ./deployWordpressDirectory.sh $resourceGroup
 
 $HDIR/removeFirewallRule.sh "$resourceGroup" "$mysqlServerName"
-echo -e "\n\nPhase Three Completed\n\n"
+

@@ -18,10 +18,10 @@ result=$(az resource list \
   --output tsv)
 
 if [[ -n "$result" ]]; then
-  echo "Resource '$newResourceName' already exists in resource group '$resourceGroup'. Stopping script."
+  echo -e "Resource '$newResourceName' already exists in resource group '$resourceGroup'. Stopping script. \n\n"
   exit 0
 else
-  echo "Resource '$newResourceName' not found in '$resourceGroup'. Continuing script..."
+  echo -e "Resource '$newResourceName' not found in '$resourceGroup'. Continuing script... \n\n"
 fi
 
 echo "Deploying template of $resourceName into resource group '$resourceGroup'..."

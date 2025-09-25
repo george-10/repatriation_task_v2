@@ -83,7 +83,7 @@ for i in $(seq 0 $((count-1))); do
   ./mainPhaseOne.sh $oldResourceGroup $oldAppServiceName $oldSqlServerName $oldDbPassword $oldUserName
   cd $DIR
   phaseone_time=$SECONDS
-  echo -e "Phase One completed in $phaseone_time seconds.\n"
+  echo -e "Phase One completed in $phaseone_time seconds.\n\n"
   confirm_if_required
 
   echo "Setting subscription to $newSubscriptionName ..." 
@@ -95,7 +95,7 @@ for i in $(seq 0 $((count-1))); do
   ./mainPhaseTwo.sh $newDbPassword
   cd $DIR
   phasetwo_time=$SECONDS-$phaseone_time
-  echo -e "Phase Two completed in $phasetwo_time seconds.\n"
+  echo -e "Phase Two completed in $phasetwo_time seconds.\n\n"
   confirm_if_required
 
   echo -e "\n"
@@ -103,7 +103,7 @@ for i in $(seq 0 $((count-1))); do
   ./mainPhaseThree.sh $newResourceGroup $newSqlServerName $newDbPassword
   cd $DIR
   phasethree_time=$SECONDS-$phasetwo_time-$phaseone_time
-  echo -e "Phase Three completed in $phasethree_time seconds.\n"
+  echo -e "Phase Three completed in $phasethree_time seconds.\n\n"
   confirm_if_required
 
   echo "Cleaning up ..."

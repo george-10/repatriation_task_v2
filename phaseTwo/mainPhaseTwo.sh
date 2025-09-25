@@ -55,4 +55,3 @@ echo -e "============================\n\n"
 $HDIR/addFirewallRuleAppservice.sh "$newResourceGroup" "$newAppServiceName" "$newSqlServerName"
 
 rm input.json
-echo -e "\n\nPhase Two Completed\n\n"
