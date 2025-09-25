@@ -21,6 +21,9 @@ confirm_if_required() {
 }
 
 for i in $(seq 0 $((count-1))); do
+
+  SECONDS=0
+
   mkdir -p ./_work
   jq ".[$i]" "$INPUTS" > "input.json"
   echo "-----------------------------------------------------------------"
@@ -79,6 +82,8 @@ for i in $(seq 0 $((count-1))); do
   cd ./phaseOne
   ./mainPhaseOne.sh $oldResourceGroup $oldAppServiceName $oldSqlServerName $oldDbPassword $oldUserName
   cd $DIR
+  phaseone_time=$SECONDS
+  printf "Phase One completed in $phaseone_time seconds.\n"
   confirm_if_required
 
   echo "Setting subscription to $newSubscriptionName ..." 
@@ -89,12 +94,16 @@ for i in $(seq 0 $((count-1))); do
   cd ./phaseTwo
   ./mainPhaseTwo.sh $newDbPassword
   cd $DIR
+  phasetwo_time=$SECONDS-$phaseone_time
+  printf "Phase Two completed in $phasetwo_time seconds.\n"
   confirm_if_required
 
   printf "\n"
   cd ./phaseThree
   ./mainPhaseThree.sh $newResourceGroup $newSqlServerName $newDbPassword
   cd $DIR
+  phasethree_time=$SECONDS-$phasetwo_time-$phaseone_time
+  printf "Phase Three completed in $phasethree_time seconds.\n"
   confirm_if_required
 
   echo "Cleaning up ..."
@@ -103,7 +112,7 @@ for i in $(seq 0 $((count-1))); do
   echo "_work deleted. input.json for iteration $i deleted."
   printf "Cleanup completed.\n"
   echo "-----------------------------------------------------------------"
-  echo "Iteration $i completed."
+  echo "Iteration $i completed in $SECONDS seconds."
   printf "-----------------------------------------------------------------\n"
 done
 
