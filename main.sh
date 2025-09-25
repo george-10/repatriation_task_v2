@@ -94,7 +94,7 @@ for i in $(seq 0 $((count-1))); do
   cd ./phaseTwo
   ./mainPhaseTwo.sh $newDbPassword
   cd $DIR
-  phasetwo_time=$SECONDS-$phaseone_time
+  phasetwo_time=$($SECONDS-$phaseone_time)
   echo -e "Phase Two completed in $phasetwo_time seconds.\n\n"
   confirm_if_required
 
@@ -102,7 +102,7 @@ for i in $(seq 0 $((count-1))); do
   cd ./phaseThree
   ./mainPhaseThree.sh $newResourceGroup $newSqlServerName $newDbPassword
   cd $DIR
-  phasethree_time=$SECONDS-$phasetwo_time-$phaseone_time
+  phasethree_time=$($SECONDS-$phasetwo_time-$phaseone_time)
   echo -e "Phase Three completed in $phasethree_time seconds.\n\n"
   confirm_if_required
 
