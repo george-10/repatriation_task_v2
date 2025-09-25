@@ -39,8 +39,7 @@ for i in $(seq 0 $((count-1))); do
   keyVaultName=$(jq -r '.keyVaultName' input.json)
   secretName=$(jq -r '.secretName' input.json)
   oldDbPassword=$(az keyvault secret show --vault-name $keyVaultName --name $secretName --query value -o tsv)
-  oldUserName=$(az keyvault secret show --vault-name $keyVaultName --name $secretName --query "contentType")
-
+  oldUserName=$(echo $(az keyvault secret show --vault-name $keyVaultName --name $secretName --query "contentType") | tr -d '"')
   newDbPassword=$(jq -r '.newDbPassword' input.json)
 
 
@@ -68,6 +67,9 @@ for i in $(seq 0 $((count-1))); do
   echo "  New App Service:    ${newAppServiceName}-APP01"
   echo "  New SQL Server:     $newSqlServerName"
   echo "  New App Service Subnet: $newAppServiceSubnet"
+  echo "  Old User Name for sql dump: $oldUserName"
+
+  echo " "
 #  echo "  Database Password:  $dbPassword"
 
   echo "Setting subscription to $oldSubscriptionName ..."

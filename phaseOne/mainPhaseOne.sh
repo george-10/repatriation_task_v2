@@ -13,7 +13,7 @@ resourceGroup=$1
 appServiceName=$2
 mysqlServerName=$3
 oldDbPassword=$4
-oldUsername=$5
+oldUserName=$5
 appServicePlanName="$(az webapp show \
   --resource-group $resourceGroup \
   --name $appServiceName \
