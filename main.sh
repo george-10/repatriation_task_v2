@@ -28,7 +28,7 @@ for i in $(seq 0 $((count-1))); do
   jq ".[$i]" "$INPUTS" > "input.json"
   echo "-----------------------------------------------------------------"
   echo "Starting iteration $i"
-  printf "-----------------------------------------------------------------\n"
+  printf '-----------------------------------------------------------------\n'
   echo "Input file created for iteration $i."
 
   oldSubscriptionName=$(jq -r '.oldSubscriptionName' input.json)
