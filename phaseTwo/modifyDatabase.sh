@@ -24,6 +24,9 @@ jq --arg pass "$dbPassword" \
   '(.resources[] | select(.type == "Microsoft.DBforMySQL/flexibleServers").properties.administratorLoginPassword) = $pass' \
   $WDIR/resources_template/$oldName.json > tmp.json && mv tmp.json $WDIR/resources_template/$oldName.json
 
+jq '(.resources[] |  select(.type == "Microsoft.DBforMySQL/flexibleServers").properties)
+      |= del(.availabilityZone)' \
+   $WDIR/resources_template/$oldName.json > tmp.json && mv tmp.json $WDIR/resources_template/$oldName.json
 
 jq '.resources |= map(select(.type != "Microsoft.DBforMySQL/flexibleServers/backups"))' \
    $WDIR/resources_template/$oldName.json > tmp.json && mv tmp.json $WDIR/resources_template/$oldName.json
