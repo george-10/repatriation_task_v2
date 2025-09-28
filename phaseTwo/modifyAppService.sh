@@ -31,7 +31,9 @@ jq '(.resources[] | select(.type == "Microsoft.Web/sites") | .properties) |= del
 jq 'del(.resources[] | select(.type == "Microsoft.Web/sites/hostNameBindings"))' \
    $WDIR/resources_template/$oldName.json > tmp.json && mv tmp.json $WDIR/resources_template/$oldName.json
 
-$HDIR/swapValues.sh "$oldName" "$newName" $WDIR/resources_template/$oldName.json
+jq --arg new "$newName" '.resources[0].name = $new' \
+   $WDIR/resources_template/$oldName.json > tmp.json && mv tmp.json $WDIR/resources_template/$oldName.json
+
 $HDIR/swapValues.sh "/subnets/$oldSubnet" "/subnets/$newSubnet" $WDIR/resources_template/$oldName.json
 
 appServicePlanId="$($HDIR/getAppServicePlanId.sh $resourceGroup)"
