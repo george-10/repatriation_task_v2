@@ -10,7 +10,7 @@ fi
 rgName=$1
 appName=$2
 
-if [[ -f "$WDIR/wwwrootzip.zip" && -d "$WDIR/wwwroot"]]; then
+if [[ -f "$WDIR/wwwrootzip.zip" && -d "$WDIR/wwwroot" ]]; then
   echo "Root zip file and wwwroot directory already exist. Skipping extraction."
   exit 0
 else
