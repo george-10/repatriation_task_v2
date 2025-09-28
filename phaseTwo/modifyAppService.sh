@@ -33,7 +33,7 @@ jq 'del(.resources[] | select(.type == "Microsoft.Web/sites/hostNameBindings"))'
 
 $HDIR/swapValues.sh "$oldName" "$newName" $WDIR/resources_template/$oldName.json
 
-sed -Ei "s|(\[concat\(parameters\('virtualNetworks_[^']+_externalid'\), '/subnets).*|\1/$newSubnet')]|" \
+sed -Ei "s|(\[concat\(parameters\('virtualNetworks_[^']+_externalid'\), '/subnets).*|\1/$newSubnet'\)\]\"|"\
   $WDIR/resources_template/$oldName.json
 
 appServicePlanId="$($HDIR/getAppServicePlanId.sh $resourceGroup)"
