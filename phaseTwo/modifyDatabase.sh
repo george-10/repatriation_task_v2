@@ -42,6 +42,8 @@ jq '(.resources[]
       |= del(.maintenancePolicy, .maintenanceWindow)' \
    $WDIR/resources_template/$oldName.json > tmp.json && mv tmp.json $WDIR/resources_template/$oldName.json
 
+jq '.resources |= map(select(.type != "Microsoft.Web/sites/privateEndpointConnections"))' \
+   $WDIR/resources_template/$oldName.json > tmp.json && mv tmp.json $WDIR/resources_template/$oldName.json
 
 jq '.resources |= map(
       select(
