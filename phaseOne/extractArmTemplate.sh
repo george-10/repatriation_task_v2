@@ -15,7 +15,7 @@ RN=$2
 
 echo "Extracting template of $RN"
 ids=$(az resource list --resource-group "$RG" --query "[?name=='$RN'].id" -o tsv)
-n=$(echo -e "%s\n" "$ids" | grep -c . || true)
+n=$(printf "%s\n" "$ids" | grep -c . || true)
 
 if [ "$n" -eq 0 ]; then
   echo -e "No resource named '$RN' found in resource group '$RG'. \n"
