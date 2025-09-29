@@ -72,6 +72,7 @@ for i in $(seq 0 $((count-1))); do
   echo "  New SQL Server:     $newSqlServerName"
   echo "  New App Service Subnet: $newAppServiceSubnet"
   echo "  Old User Name for sql dump: $oldUserName"
+  echo "  Old Domain Name:    $oldDomainName"
 
   echo " "
 #  echo "  Database Password:  $dbPassword"
