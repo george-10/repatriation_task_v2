@@ -41,7 +41,7 @@ appUrl=$(az webapp show \
   --query "defaultHostName" \
   -o tsv)
 
-scm_url_base=$(echo "$appUrl" | awk -F'.' '{print $1 ".scm." $2 "." $3 "." $4}')
+scm_url_base=$(echo "$appUrl" | awk -F'.' '{print $1 ".scm." $2 "." $3}')
 scm_url_root="https://$scm_url_base/api/zip/site/wwwroot/"
 scm_url_default="https://$scm_url_base/api/vfs/default"
 
