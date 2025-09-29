@@ -1,5 +1,5 @@
 #!/bin/bash
-
+CONFIG_FILE="$WDIR/wwwroot/wp-config.php"
 if [ $# -ne 4 ]; then
   echo "Usage: $0 <resource-group> <mysql-server-name> <db-password> <old-domain-name>"
   exit 1
@@ -12,11 +12,7 @@ mysqlServerName=$2
 dbPassword=$3
 oldDomainName=$4
 
-dbDatabase=$(az mysql flexible-server db list \
-  --resource-group $resourceGroup \
-  --server-name $mysqlServerName \
-  --query "[?name!='information_schema' && name!='mysql' && name!='performance_schema' && name!='sys'].name" \
-  -o tsv)
+dbDatabase=$(grep "define( 'DB_HOST'" "$CONFIG_FILE" | sed "s/.*'DB_HOST', *'\([^']*\)'.*/\1/")
 dbServerHostName="$mysqlServerName.mysql.database.azure.com"
 dbUserName=$(cat $WDIR/dbUserName.txt)
 echo "============================"

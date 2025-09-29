@@ -44,11 +44,10 @@ echo $dbUserName > $WDIR/dbUserName.txt
 
 
 echo "oldUserName: $oldUserName"
-echo "dbDatabase: $dbDatabase"
 echo "dbServerHostName: $dbServerHostName"
 echo "oldDbPassword: $oldDbPassword"
 
-./extractSqlDump.sh $oldUserName $dbDatabase $oldDbPassword $dbServerHostName
+./extractSqlDump.sh $oldUserName $oldDbPassword $dbServerHostName
 
 $HDIR/getRegion.sh $resourceGroup > $WDIR/oldRegion.txt
 $HDIR/getAppServiceSubnet.sh "$resourceGroup" "$appServiceName" > $WDIR/oldSubnetName.txt

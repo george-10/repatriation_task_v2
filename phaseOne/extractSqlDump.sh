@@ -1,7 +1,9 @@
 #!/bin/bash
 WDIR="$HOME/repatriationTask/_work"
-if [ $# -ne 4 ]; then
-    echo "Usage: $0 <username> <database-name> <password> <host>"
+CONFIG_FILE="$WDIR/wwwroot/wp-config.php"
+
+if [ $# -ne 3 ]; then
+    echo "Usage: $0 <username> <password> <host>"
     exit 1
 fi
 
@@ -14,9 +16,9 @@ fi
 
 
 user=$1
-database=$2
-pass=$3
-host=$4
+database=$(grep "define( 'DB_NAME'" "$CONFIG_FILE" | sed "s/.*'DB_HOST', *'\([^']*\)'.*/\1/")
+pass=$2
+host=$3
 
 echo "Extracting SQL Dump from database $database on host $host with user $user ..."
 
