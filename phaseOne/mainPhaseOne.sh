@@ -3,7 +3,7 @@ set -euo pipefail
 
 WDIR="$HOME/repatriationTask/_work"
 HDIR="$HOME/repatriationTask/helperFunctions"
-
+CONFIG_FILE="$WDIR/wwwroot/wp-config.php"
 if [ $# -lt 5 ]; then
   echo "Usage: $0 <resource-group> <app-service-name> <mysql-server-name> <old-db-password> <old-db-username>"
   exit 1
