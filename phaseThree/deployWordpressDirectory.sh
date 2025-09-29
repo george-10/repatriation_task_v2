@@ -39,13 +39,13 @@ scm_url_root="https://$scm_url_base/api/zipdeploy/"
 scm_url_default="https://$scm_url_base/api/vfs/"
 echo "Deploying wordpress.zip to App Service '$APP_NAME' in resource group '$RESOURCE_GROUP'..."
 
-cred="\$$appName:$password"
+cred="\$$APP_NAME:$password"
 echo "Credentials: $cred"
 
 curl -u "$cred" \
   -X POST \
   --data-binary @"$WDIR/wordpress.zip" \
-  "$scm_url_root/api/zipdeploy"
+  "$scm_url_root"
 echo "Zip file deployment complete."
 
 echo "Deploying default file to App Service '$APP_NAME' in resource group '$RESOURCE_GROUP'..."
