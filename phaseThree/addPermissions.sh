@@ -26,4 +26,7 @@ GRANT ALL PRIVILEGES ON \`${DB_NAME}\`.* TO '${DB_USER}'@'%' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
 EOF
 
+mysql -h"$DB_HOST" -u"$DB_ROOT_USER" --password="$DB_ROOT_PASS" -e \
+"SHOW GRANTS FOR '${DB_USER}'@'%';"
+
 echo -e "User '$DB_USER' added successfully with access to database '$DB_NAME' on host '$DB_HOST' \n"
