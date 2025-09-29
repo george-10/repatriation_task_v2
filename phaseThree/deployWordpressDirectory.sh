@@ -9,17 +9,50 @@ if [ "$#" -ne 1 ]; then
     exit 1
 fi
 
+
 RESOURCE_GROUP=$1
 APP_NAME=$(az webapp list \
   --resource-group $RESOURCE_GROUP \
   --query "[0].name" -o tsv)
 
+username=$(az webapp deployment list-publishing-profiles \
+  --name "$APP_NAME" \
+  --resource-group "$RESOURCE_GROUP" \
+  --query "[?publishMethod=='FTP'].[userName]" \
+  -o tsv)
+
+password=$(az webapp deployment list-publishing-profiles \
+  --name "$APP_NAME" \
+  --resource-group "$RESOURCE_GROUP" \
+  --query "[?publishMethod=='FTP'].[userPWD]" \
+  -o tsv)
+
+
+appUrl=$(az webapp show \
+  --name "$APP_NAME" \
+  --resource-group "$RESOURCE_GROUP" \
+  --query "defaultHostName" \
+  -o tsv)
+
+scm_url_base=$(echo "$appUrl" | awk -F'.' '{print $1 ".scm." $2 "." $3 "." $4}')
+scm_url_root="https://$scm_url_base/api/zipdeploy/"
+scm_url_default="https://$scm_url_base/api/vfs/"
 echo "Deploying wordpress.zip to App Service '$APP_NAME' in resource group '$RESOURCE_GROUP'..."
-az webapp deploy \
-    --resource-group "$RESOURCE_GROUP" \
-    --name "$APP_NAME" \
-    --src-path $WDIR/wordpress.zip \
-    --type zip
+
+cred="\$$appName:$password"
+echo "Credentials: $cred"
+
+curl -u "$cred" \
+  -X POST \
+  --data-binary @"$WDIR/wordpress.zip" \
+  "$scm_url_root/api/zipdeploy"
+echo "Zip file deployment complete."
+
+echo "Deploying default file to App Service '$APP_NAME' in resource group '$RESOURCE_GROUP'..."
+curl -X PUT -u "$cred" \
+  --data-binary @"$WDIR/default" \
+  "$scm_url_default"
+echo "Default file deployment complete."
 
 if [ $? -eq 0 ]; then
     echo -e "Deployment succeeded\n"
