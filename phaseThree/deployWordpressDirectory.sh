@@ -36,7 +36,7 @@ appUrl=$(az webapp show \
 
 scm_url_base=$(echo "$appUrl" | awk -F'.' '{print $1 ".scm." $2 "." $3 "." $4}')
 scm_url_root="https://$scm_url_base/api/zipdeploy/"
-scm_url_default="https://$scm_url_base/api/vfs/"
+scm_url_default="https://$scm_url_base/api/vfs/default"
 echo "Deploying wordpress.zip to App Service '$APP_NAME' in resource group '$RESOURCE_GROUP'..."
 
 cred="\$$APP_NAME:$password"
