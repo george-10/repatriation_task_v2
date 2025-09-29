@@ -39,5 +39,6 @@ echo "Deploying SQL Dump and WordPress Directory"
 ./deploySqlDump.sh $dbUserName $dbDatabase $dbPassword $dbServerHostName
 ./deployWordpressDirectory.sh $resourceGroup
 
+./addPermissions.sh $dbUserName $dbPassword
 #$HDIR/removeFirewallRule.sh "$resourceGroup" "$mysqlServerName"
 
