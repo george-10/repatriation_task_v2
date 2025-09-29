@@ -42,6 +42,12 @@ dbUserName=$(jq -r '.resources[] | select(.properties.administratorLogin != null
 
 echo $dbUserName > $WDIR/dbUserName.txt
 
+
+echo "oldUserName: $oldUserName"
+echo "dbDatabase: $dbDatabase"
+echo "dbServerHostName: $dbServerHostName"
+echo "oldDbPassword: $oldDbPassword"
+
 ./extractSqlDump.sh $oldUserName $dbDatabase $oldDbPassword $dbServerHostName
 
 $HDIR/getRegion.sh $resourceGroup > $WDIR/oldRegion.txt
