@@ -14,19 +14,15 @@ if [ $# -ne 1 ]; then
   exit 1
 fi
 
-escape_sed_repl() {
-  printf '%s' "$1" | sed 's/[\/&]/\\&/g'
-}
+escape_sed_repl() { printf '%s' "$1" | sed 's/[\\&]/\\&/g'; }
 
 update_wp_config() {
   local key=$1
-  local new_value=$2
+  local value_escaped
+  value_escaped=$(escape_sed_repl "$2")
   local file=$3
-
-  local repl
-  repl=$(escape_sed_repl "$new_value")
-
-  sed -i "s|\(define( '${key}', *'\)[^']*\(' );\)|\1${repl}\2|" "$file"
+  local d=$'\x1f'  # rare delimiter
+  sed -i "s${d}\(define( '${key}', *'\)[^']*\('\s*);\)${d}\1${value_escaped}\2${d}" "$file"
 }
 
 source $WDIR/urls/new_url.env
