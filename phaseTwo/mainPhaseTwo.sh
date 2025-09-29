@@ -52,6 +52,6 @@ echo -e "============================\n\n"
 
 ./modifyDatabase.sh "$oldRegion" "$newRegion" "$oldSqlServerName" "$newSqlServerName" "$dbPassword"
 ./deployResource.sh "$oldSqlServerName" "$newResourceGroup" "$newSqlServerName"
-$HDIR/addFirewallRuleAppservice.sh "$newResourceGroup" "$newAppServiceName" "$newSqlServerName"
+#$HDIR/addFirewallRuleAppservice.sh "$newResourceGroup" "$newAppServiceName" "$newSqlServerName"
 
 rm input.json
