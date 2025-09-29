@@ -43,7 +43,7 @@ appUrl=$(az webapp show \
 
 scm_url_base=$(echo "$appUrl" | awk -F'.' '{print $1 ".scm." $2 "." $3 "." $4}')
 scm_url_root="https://$scm_url_base/api/zip/site/wwwroot/"
-scm_url_default="https://$scm_url_base/api/vfs/home/default"
+scm_url_default="https://$scm_url_base/api/vfs/default"
 
 echo "export OLD_URL=${appUrl}" > $WDIR/urls/old_url.env
 
@@ -62,7 +62,7 @@ curl -u "$cred" -o $WDIR/wwwrootzip.zip $scm_url_root
 echo -e "Download completed. Zip file is in $WDIR/wwwrootzip.zip\n"
 
 echo "Downloading default directory: "
-curl -u "$cred" -o $WDIR/default/ $scm_url_default
+curl -u "$cred" -o $WDIR/default $scm_url_default
 echo -e "Download completed. \"Default\" file is in $WDIR/default\n"
 
 echo "Unzipping the wwwroot: "
