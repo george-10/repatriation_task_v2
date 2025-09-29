@@ -9,8 +9,8 @@ CONFIG_FILE="$WDIR/wwwroot/wp-config.php"
 source $WDIR/urls/new_url.env
 newUrl=$(echo -e '%s\n' "$NEW_URL" | sed 's/&/\\&/g')
 
-if [ $# -ne 2 ]; then
-  echo "Usage: $0 <resource-group> <new-domain-name>"
+if [ $# -ne 1 ]; then
+  echo "Usage: $0 <resource-group>"
   exit 1
 fi
 
@@ -22,8 +22,11 @@ update_wp_config() {
   sed -i "s/\(define( '${key}', *'\)[^']*\(' );\)/\1${new_value}\2/" "$file"
 }
 
+source $WDIR/urls/new_url.env
+
 ResourceGrp=$1
-NewDomain=$2
+NewDomain=$(echo -e '%s\n' "$NEW_URL" | sed 's/&/\\&/g')
+
 
 DB_HOST_NEW=$(az mysql flexible-server list \
   --resource-group $ResourceGrp \
