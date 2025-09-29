@@ -14,6 +14,8 @@
     "keyVaultName": "x",
     "secretName": "x",
 
-    "newDbPassword":"x"
+    "newDbPassword":"x",
+
+    "oldDomainName": "x"
   }
 ]

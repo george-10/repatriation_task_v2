@@ -41,23 +41,29 @@ appUrl=$(az webapp show \
   --query "defaultHostName" \
   -o tsv)
 
-scm_url=$(echo "$appUrl" | awk -F'.' '{print $1 ".scm." $2 "." $3 "." $4}')
-scm_url="https://$scm_url/api/zip/site/wwwroot/"
-
+scm_url_base=$(echo "$appUrl" | awk -F'.' '{print $1 ".scm." $2 "." $3 "." $4}')
+scm_url_root="https://$scm_url_base/api/zip/site/wwwroot/"
+scm_url_default="https://$scm_url_base/api/vfs/home/default"
 
 echo "export OLD_URL=${appUrl}" > $WDIR/urls/old_url.env
 
 echo "OLD_URL set to ${appUrl}"
 
 echo "Connecting to App Service: $appName"
-echo "URL: $scm_url"
+echo "URL: $scm_url_root"
 echo "User: $appName"
 echo "Password: $password"
 
 cred="\$$appName:$password"
 echo "Credentials: $cred"
 
-curl -u "$cred" -o $WDIR/wwwrootzip.zip $scm_url
+echo "Downloading the wwwroot zip file: "
+curl -u "$cred" -o $WDIR/wwwrootzip.zip $scm_url_root
+echo -e "Download completed. Zip file is in $WDIR/wwwrootzip.zip\n"
+
+echo "Downloading default directory: "
+curl -u "$cred" -o $WDIR/default/ $scm_url_default
+echo -e "Download completed. \"Default\" file is in $WDIR/default\n"
 
 echo "Unzipping the wwwroot: "
 

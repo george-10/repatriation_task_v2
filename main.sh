@@ -44,6 +44,7 @@ for i in $(seq 0 $((count-1))); do
   oldDbPassword=$(az keyvault secret show --vault-name $keyVaultName --name $secretName --query value -o tsv)
   oldUserName=$(echo $(az keyvault secret show --vault-name $keyVaultName --name $secretName --query "contentType") | tr -d '"')
   newDbPassword=$(jq -r '.newDbPassword' input.json)
+  oldDomainName=$(jq -r '.oldDomainName' input.json)
 
 
   if jq -e 'has("oldAppServiceName")' input.json > /dev/null; then
@@ -100,7 +101,7 @@ for i in $(seq 0 $((count-1))); do
 
   echo -e "\n"
   cd ./phaseThree
-  ./mainPhaseThree.sh $newResourceGroup $newSqlServerName $newDbPassword
+  ./mainPhaseThree.sh $newResourceGroup $newSqlServerName $newDbPassword $oldDomainName
   cd $DIR
   phasethree_time=$(( SECONDS - phaseone_time - phasetwo_time ))
   echo -e "\n\nPhase Three completed in $phasethree_time seconds.\n\n"

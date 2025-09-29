@@ -1,7 +1,7 @@
 #!/bin/bash
 
-if [ $# -ne 3 ]; then
-  echo "Usage: $0 <resource-group> <mysql-server-name> <db-password>"
+if [ $# -ne 4 ]; then
+  echo "Usage: $0 <resource-group> <mysql-server-name> <db-password> <old-domain-name>"
   exit 1
 fi
 HDIR="$HOME/repatriationTask/helperFunctions"
@@ -10,6 +10,7 @@ WDIR="$HOME/repatriationTask/_work"
 resourceGroup=$1
 mysqlServerName=$2
 dbPassword=$3
+oldDomainName=$4
 
 dbDatabase=$(az mysql flexible-server db list \
   --resource-group $resourceGroup \
@@ -27,16 +28,16 @@ echo dbUserName: $dbUserName
 
 echo "Getting New URL"
 
-$HDIR/addFirewallRule.sh "$resourceGroup" "$mysqlServerName"
+#$HDIR/addFirewallRule.sh "$resourceGroup" "$mysqlServerName"
 $HDIR/getNewUrl.sh $resourceGroup
 
 echo "Modifying SQL Dump and WordPress Directory"
-./modifySqlDump.sh
-./modifyWordpressDirectory.sh $resourceGroup
+./modifySqlDump.sh $oldDomainName
+./modifyWordpressDirectory.sh $resourceGroup 
 
 echo "Deploying SQL Dump and WordPress Directory"
 ./deploySqlDump.sh $dbUserName $dbDatabase $dbPassword $dbServerHostName
 ./deployWordpressDirectory.sh $resourceGroup
 
-$HDIR/removeFirewallRule.sh "$resourceGroup" "$mysqlServerName"
+#$HDIR/removeFirewallRule.sh "$resourceGroup" "$mysqlServerName"
 
