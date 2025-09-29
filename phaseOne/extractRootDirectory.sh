@@ -27,11 +27,15 @@ password=$(az webapp deployment list-publishing-profiles \
   --name "$appName" \
   --resource-group "$rgName" \
   --query "[?publishMethod=='FTP'].[userPWD]" \
-  -o tsv)
+  -o tsv | head -1)
  
-echo "Extracting wwwroot from App Service: $appName ..."
+# Debug: Check what's in the password variable
+echo "DEBUG: Password length: ${#password}"
+echo "DEBUG: Password line count: $(echo "$password" | wc -l)"
+echo "DEBUG: Password (hex dump):"
+echo "$password" | xxd -l 200
  
-mkdir -p "$WDIR/urls"
+echo "Extracting wwwroot from App Service: $appName ..."mkdir -p "$WDIR/urls"
 [ -f $WDIR/urls/old_url.env ] && rm $WDIR/urls/old_url.env
  
  
@@ -85,5 +89,6 @@ echo "Unzipping the wwwroot: "
 unzip $WDIR/wwwrootzip.zip -d $WDIR/wwwroot
  
 echo -e "Unzipping completed. Files are in $WDIR/wwwroot\n"
+ 
  
  
