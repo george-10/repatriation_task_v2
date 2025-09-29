@@ -29,11 +29,7 @@ password=$(az webapp deployment list-publishing-profiles \
   --query "[?publishMethod=='FTP'].[userPWD]" \
   -o tsv | head -1)
  
-# Debug: Check what's in the password variable
-echo "DEBUG: Password length: ${#password}"
-echo "DEBUG: Password line count: $(echo "$password" | wc -l)"
-echo "DEBUG: Password (hex dump):"
-echo "$password" | xxd -l 200
+
  
 echo "Extracting wwwroot from App Service: $appName ..."mkdir -p "$WDIR/urls"
 [ -f $WDIR/urls/old_url.env ] && rm $WDIR/urls/old_url.env
