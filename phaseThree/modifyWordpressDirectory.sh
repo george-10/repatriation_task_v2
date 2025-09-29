@@ -14,12 +14,19 @@ if [ $# -ne 1 ]; then
   exit 1
 fi
 
+escape_sed_repl() {
+  printf '%s' "$1" | sed 's/[\/&]/\\&/g'
+}
+
 update_wp_config() {
   local key=$1
   local new_value=$2
   local file=$3
 
-  sed -i "s/\(define( '${key}', *'\)[^']*\(' );\)/\1${new_value}\2/" "$file"
+  local repl
+  repl=$(escape_sed_repl "$new_value")
+
+  sed -i "s|\(define( '${key}', *'\)[^']*\(' );\)|\1${repl}\2|" "$file"
 }
 
 source $WDIR/urls/new_url.env
@@ -38,8 +45,6 @@ update_wp_config "DB_HOST" "$DB_HOST_NEW" "$CONFIG_FILE"
 
 update_wp_config "DOMAIN_CURRENT_SITE" "$NewDomain" "$CONFIG_FILE"
 
-
-sed -i "s/\(define( 'DB_HOST', *'\)[^']*\(' );\)/\1${DB_HOST_NEW}\2/" $CONFIG_FILE
 
 echo -e "wp-config.php updated successfully! \n"
 echo "creating zip file"

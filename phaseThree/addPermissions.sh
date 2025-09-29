@@ -5,7 +5,7 @@ WDIR="$HOME/repatriationTask/_work"
 HDIR="$HOME/repatriationTask/helperFunctions"
 CONFIG_FILE="$WDIR/wwwroot/wp-config.php"
 
-if [ $# -ne 6 ]; then
+if [ $# -ne 2 ]; then
   echo "Usage: $0 <db-root-user> <db-root-pass>"
   exit 1
 fi
