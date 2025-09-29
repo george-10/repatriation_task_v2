@@ -7,7 +7,7 @@ DIR="$HOME/repatriationTask/phaseTwo"
 CONFIG_FILE="$WDIR/wwwroot/wp-config.php"
 
 source $WDIR/urls/new_url.env
-newUrl=$(printf '%s\n' "$NEW_URL" | sed 's/&/\\&/g')
+newUrl=$(printf '%s' "$NEW_URL" | sed 's/[\/&\\]/\\&/g')
 
 if [ $# -ne 1 ]; then
   echo "Usage: $0 <resource-group>"
