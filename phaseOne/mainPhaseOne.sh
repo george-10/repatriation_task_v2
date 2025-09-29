@@ -22,11 +22,7 @@ appServicePlanName="$(az webapp show \
 
 echo $appServicePlanName > $WDIR/appServicePlanName.txt
 
-dbDatabase=$(az mysql flexible-server db list \
-  --resource-group $resourceGroup \
-  --server-name $mysqlServerName \
-  --query "[?name!='information_schema' && name!='mysql' && name!='performance_schema' && name!='sys'].name" \
-  -o tsv)
+dbDatabase=$(grep "define( 'DB_NAME'" "$CONFIG_FILE" | sed "s/.*'DB_NAME', *'\([^']*\)'.*/\1/")
 dbServerHostName="$3.mysql.database.azure.com"
 echo "============================"
 echo "Phase One:"
