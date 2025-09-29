@@ -42,17 +42,19 @@ echo "Deploying wordpress.zip to App Service '$APP_NAME' in resource group '$RES
 cred="\$$APP_NAME:$password"
 echo "Credentials: $cred"
 
+echo "Deploying default file to App Service '$APP_NAME' in resource group '$RESOURCE_GROUP'..."
+curl -X PUT -u "$cred" \
+  --data-binary @"$WDIR/default" \
+  "$scm_url_default"
+echo "Default file deployment complete."
+
 curl -u "$cred" \
   -X POST \
   --data-binary @"$WDIR/wordpress.zip" \
   "$scm_url_root"
 echo "Zip file deployment complete."
 
-echo "Deploying default file to App Service '$APP_NAME' in resource group '$RESOURCE_GROUP'..."
-curl -X PUT -u "$cred" \
-  --data-binary @"$WDIR/default" \
-  "$scm_url_default"
-echo "Default file deployment complete."
+
 
 if [ $? -eq 0 ]; then
     echo -e "Deployment succeeded\n"
