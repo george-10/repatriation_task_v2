@@ -16,7 +16,7 @@ fi
 
 
 user=$1
-database=$(grep "define( 'DB_NAME'" "$CONFIG_FILE" | sed "s/.*'DB_HOST', *'\([^']*\)'.*/\1/")
+database=$(grep "define( 'DB_NAME'" "$CONFIG_FILE" | sed "s/.*'DB_NAME', *'\([^']*\)'.*/\1/")
 pass=$2
 host=$3
 

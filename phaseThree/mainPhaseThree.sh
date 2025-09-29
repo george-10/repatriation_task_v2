@@ -12,7 +12,7 @@ mysqlServerName=$2
 dbPassword=$3
 oldDomainName=$4
 
-dbDatabase=$(grep "define( 'DB_HOST'" "$CONFIG_FILE" | sed "s/.*'DB_HOST', *'\([^']*\)'.*/\1/")
+dbDatabase=$(grep "define( 'DB_NAME'" "$CONFIG_FILE" | sed "s/.*'DB_NAME', *'\([^']*\)'.*/\1/")
 dbServerHostName="$mysqlServerName.mysql.database.azure.com"
 dbUserName=$(cat $WDIR/dbUserName.txt)
 echo "============================"
