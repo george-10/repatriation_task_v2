@@ -37,9 +37,8 @@ jq '.resources |= map(select(.type != "Microsoft.Web/sites/privateEndpointConnec
 jq '.resources |= map(select(.type != "Microsoft.Web/sites/backups"))' \
    $WDIR/resources_template/$oldName.json > tmp.json && mv tmp.json $WDIR/resources_template/$oldName.json
 
-jq 'del(.parameters[ keys[] | select(test("backups_")) ])' \
+jq '(.parameters // {}) |= with_entries(select(.key | test("^backups_") | not))' \
   "$WDIR/resources_template/$oldName.json" > tmp.json && mv tmp.json "$WDIR/resources_template/$oldName.json"
-$HDIR/swapValues.sh "$oldName" "$newName" $WDIR/resources_template/$oldName.json
 
 jq '.resources |= map(select(.type | test("/slots(/|$)") | not))' \
   "$WDIR/resources_template/$oldName.json" > tmp.json && mv tmp.json "$WDIR/resources_template/$oldName.json"
