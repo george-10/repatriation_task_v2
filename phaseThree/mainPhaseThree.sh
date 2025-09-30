@@ -8,8 +8,6 @@ HDIR="$HOME/repatriationTask/helperFunctions"
 WDIR="$HOME/repatriationTask/_work"
 CONFIG_FILE="$WDIR/wwwroot/wp-config.php"
 
-
-source "$WDIR/urls/old_url.env"
 source "$WDIR/urls/new_url.env"
 
 resourceGroup=$1

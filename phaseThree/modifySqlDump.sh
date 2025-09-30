@@ -8,9 +8,6 @@ fi
 
 WDIR="$HOME/repatriationTask/_work"
 
-source "$WDIR/urls/old_url.env"
-source "$WDIR/urls/new_url.env"
-
 oldUrl="$1"
 newUrl="$2"
 
