@@ -46,10 +46,12 @@ echo "Deploying default file to App Service '$APP_NAME' in resource group '$RESO
 curl -X PUT -u "$cred" \
   --data-binary @"$WDIR/default" \
   "$scm_url_default"
-echo "Default file deployment complete."
+echo -e "\nDefault file deployment complete."
+echo -e "Deploying wordpress.zip to App Service '$APP_NAME' in resource group '$RESOURCE_GROUP'...\n"
 
 curl -u "$cred" \
   -X POST \
+  --progress-bar \
   -T "$WDIR/wordpress.zip" \
   "$scm_url_root" && echo "Zip file deployment complete."
 
