@@ -50,9 +50,11 @@ echo "Default file deployment complete."
 
 curl -u "$cred" \
   -X POST \
-  -H "Content-Type: application/zip" \
   --data-binary @"$WDIR/wordpress.zip" \
-  "$scm_url_root" && echo "Zip file deployment complete."
+  "$scm_url_root"
+  
+echo "Zip file deployment complete."
+
 
 
 if [ $? -eq 0 ]; then
