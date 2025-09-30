@@ -25,7 +25,7 @@ password=$(az webapp deployment list-publishing-profiles \
   --name "$APP_NAME" \
   --resource-group "$RESOURCE_GROUP" \
   --query "[?publishMethod=='FTP'].[userPWD]" \
-  -o tsv)
+  -o tsv| head -1)
 
 
 appUrl=$(az webapp show \
