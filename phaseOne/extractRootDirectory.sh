@@ -58,7 +58,7 @@ cred="\$$appName:$password"
 echo "Credentials: $cred"
  
 echo "Downloading the wwwroot zip file: "
-curl -u "$cred" -o $WDIR/wwwrootzip.zip $scm_url_root -w "HTTP Status: %{http_code}\n" -v
+curl -u "$cred" -o $WDIR/wwwrootzip.zip $scm_url_root -w "HTTP Status: %{http_code}\n"
 curl_exit_code=$?
 echo "Download completed. Zip file is in $WDIR/wwwrootzip.zip"
 echo "Curl exit code: $curl_exit_code"
