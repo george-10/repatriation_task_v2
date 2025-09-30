@@ -1,5 +1,4 @@
 #!/bin/bash
-set -euo pipefail
 
 if [ $# -ne 2 ]; then
   echo "Usage: $0 <old-domain-name> <new-domain-name>"
