@@ -8,6 +8,10 @@ HDIR="$HOME/repatriationTask/helperFunctions"
 WDIR="$HOME/repatriationTask/_work"
 CONFIG_FILE="$WDIR/wwwroot/wp-config.php"
 
+
+source "$WDIR/urls/old_url.env"
+source "$WDIR/urls/new_url.env"
+
 resourceGroup=$1
 mysqlServerName=$2
 dbPassword=$3
@@ -29,7 +33,7 @@ echo "Getting New URL"
 $HDIR/getNewUrl.sh $resourceGroup
 
 echo "Modifying SQL Dump and WordPress Directory"
-./modifySqlDump.sh $oldDomainName
+./modifySqlDump.sh $oldDomainName $NEW_URL
 ./modifyWordpressDirectory.sh $resourceGroup 
 
 echo "Deploying SQL Dump and WordPress Directory"
