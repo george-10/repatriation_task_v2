@@ -22,7 +22,7 @@ appServicePlanName="$(az webapp show \
 
 echo $appServicePlanName > $WDIR/appServicePlanName.txt
 
-dbDatabase=$(grep "define( 'DB_NAME'" "$CONFIG_FILE" | sed "s/.*'DB_NAME', *'\([^']*\)'.*/\1/")
+
 dbServerHostName="$3.mysql.database.azure.com"
 echo "============================"
 echo "Phase One:"
@@ -38,6 +38,7 @@ dbUserName=$(jq -r '.resources[] | select(.properties.administratorLogin != null
 
 echo $dbUserName > $WDIR/dbUserName.txt
 
+dbDatabase=$(grep "define( 'DB_NAME'" "$CONFIG_FILE" | sed "s/.*'DB_NAME', *'\([^']*\)'.*/\1/")
 
 echo "oldUserName: $oldUserName"
 echo "dbServerHostName: $dbServerHostName"
