@@ -56,6 +56,9 @@ jq '.resources |= map(select(.type != "Microsoft.DBforMySQL/flexibleServers/priv
 jq '.resources |= map(select(.type != "Microsoft.DBforMySQL/flexibleServers/privateEndpointConnections"))' \
    $WDIR/resources_template/$oldName.json > tmp.json && mv tmp.json $WDIR/resources_template/$oldName.json
 
+jq 'del(.resources[]?.properties?.backup?.geoRedundantBackup)' \
+  "$WDIR/resources_template/$oldName.json" > tmp.json && mv tmp.json "$WDIR/resources_template/$oldName.json"
+
 jq '.resources |= map(
       select(
         .type != "Microsoft.DBforMySQL/flexibleServers/databases"
