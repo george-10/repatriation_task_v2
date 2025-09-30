@@ -43,6 +43,8 @@ jq '(.parameters // {}) |= with_entries(select(.key | test("^backups_") | not))'
 jq '.resources |= map(select(.type | test("/slots(/|$)") | not))' \
   "$WDIR/resources_template/$oldName.json" > tmp.json && mv tmp.json "$WDIR/resources_template/$oldName.json"
 
+$HDIR/swapValues.sh "$oldName" "$newName" $WDIR/resources_template/$oldName.json
+
 sed -Ei "s|(\[concat\(parameters\('virtualNetworks_[^']+_externalid'\), '/subnets).*|\1/$newSubnet'\)\]\"|"\
   $WDIR/resources_template/$oldName.json
 
