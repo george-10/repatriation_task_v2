@@ -35,7 +35,7 @@ appUrl=$(az webapp show \
   -o tsv)
 
 scm_url_base=$(echo "$appUrl" | awk -F'.' '{print $1 ".scm." $2 "." $3}')
-scm_url_root="https://$scm_url_base/api/zipdeploy/"
+scm_url_root="https://$scm_url_base/api/zipdeploy"
 scm_url_default="https://$scm_url_base/api/vfs/default"
 echo "Deploying wordpress.zip to App Service '$APP_NAME' in resource group '$RESOURCE_GROUP'..."
 
@@ -50,9 +50,9 @@ echo "Default file deployment complete."
 
 curl -u "$cred" \
   -X POST \
-  --data-binary @"$WDIR/wordpress.zip" \
-  "$scm_url_root"
-  
+  -T "$WDIR/wordpress.zip" \
+  "$scm_url_root" && echo "Zip file deployment complete."
+
 echo "Zip file deployment complete."
 
 
