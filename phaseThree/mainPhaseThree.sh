@@ -1,11 +1,12 @@
 #!/bin/bash
-CONFIG_FILE="$WDIR/wwwroot/wp-config.php"
+
 if [ $# -ne 4 ]; then
   echo "Usage: $0 <resource-group> <mysql-server-name> <db-password> <old-domain-name>"
   exit 1
 fi
 HDIR="$HOME/repatriationTask/helperFunctions"
 WDIR="$HOME/repatriationTask/_work"
+CONFIG_FILE="$WDIR/wwwroot/wp-config.php"
 
 resourceGroup=$1
 mysqlServerName=$2
