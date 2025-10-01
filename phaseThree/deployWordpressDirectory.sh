@@ -53,7 +53,7 @@ az webapp deployment source config-zip \
     --resource-group "$RESOURCE_GROUP" \
     --name "$APP_NAME" \
     --src $WDIR/wordpress.zip \
-    --timeout 1800
+    --timeout 7200
 
 echo "Zip file deployment complete."
 
