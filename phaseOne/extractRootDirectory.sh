@@ -31,7 +31,9 @@ password=$(az webapp deployment list-publishing-profiles \
  
 
  
-echo "Extracting wwwroot from App Service: $appName ..."mkdir -p "$WDIR/urls"
+echo "Extracting wwwroot from App Service: $appName ..."
+
+mkdir -p "$WDIR/urls"
 [ -f $WDIR/urls/old_url.env ] && rm $WDIR/urls/old_url.env
  
  
@@ -41,7 +43,7 @@ appUrl=$(az webapp show \
   --query "defaultHostName" \
   -o tsv)
  
-scm_url_base=$(echo "$appUrl" | awk -F'.' '{print $1 ".scm." $2 "." $3}')
+scm_url_base=$(awk -F. 'BEGIN{OFS="."} {$1=$1 ".scm"; print}' <<< "$appUrl")
 scm_url_root="https://$scm_url_base/api/zip/site/wwwroot/"
 scm_url_default="https://$scm_url_base/api/vfs/default"
  
@@ -82,7 +84,7 @@ echo -e "Download completed. \"Default\" file is in $WDIR/default\n"
  
 echo "Unzipping the wwwroot: "
  
-unzip $WDIR/wwwrootzip.zip -d $WDIR/wwwroot
+unzip $WDIR/wwwrootzip.zip -d $WDIR/wwwroot > /dev/null 2>&1
  
 echo -e "Unzipping completed. Files are in $WDIR/wwwroot\n"
  

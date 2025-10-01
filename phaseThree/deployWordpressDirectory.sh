@@ -34,7 +34,7 @@ appUrl=$(az webapp show \
   --query "defaultHostName" \
   -o tsv)
 
-scm_url_base=$(echo "$appUrl" | awk -F'.' '{print $1 ".scm." $2 "." $3}')
+scm_url_base=$(awk -F. 'BEGIN{OFS="."} {$1=$1 ".scm"; print}' <<< "$appUrl")
 scm_url_root="https://$scm_url_base/api/zipdeploy"
 scm_url_default="https://$scm_url_base/api/vfs/default"
 echo "Deploying wordpress.zip to App Service '$APP_NAME' in resource group '$RESOURCE_GROUP'..."
@@ -46,14 +46,14 @@ echo "Deploying default file to App Service '$APP_NAME' in resource group '$RESO
 curl -X PUT -u "$cred" \
   --data-binary @"$WDIR/default" \
   "$scm_url_default"
-echo -e "\nDefault file deployment complete."
+echo -e "\nDefault file deployment complete.\n"
 echo -e "Deploying wordpress.zip to App Service '$APP_NAME' in resource group '$RESOURCE_GROUP'...\n"
 
-curl -u "$cred" \
-  -X POST \
-  --progress-bar \
-  -T "$WDIR/wordpress.zip" \
-  "$scm_url_root" && echo "Zip file deployment complete."
+az webapp deployment source config-zip \
+    --resource-group "$RESOURCE_GROUP" \
+    --name "$APP_NAME" \
+    --src $WDIR/wordpress.zip \
+    --timeout 1800
 
 echo "Zip file deployment complete."
 
