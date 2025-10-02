@@ -19,7 +19,7 @@ oldDomainName=$4
 $HDIR/getNewUrl.sh $resourceGroup
 source "$WDIR/urls/new_url.env"
 
-dbDatabase=$(grep "define( [\"']DB_NAME[\"']" "$CONFIG_FILE" | sed "s/.*'DB_NAME', *'\([^']*\)'.*/\1/")
+dbDatabase=$(grep "define( *[\"']DB_NAME[\"'] *" $CONFIG_FILE | sed -E "s/.*[\"']DB_NAME[\"'] *,  **[\"']([^\"']+)[\"'].* */\1/")
 dbServerHostName="$mysqlServerName.mysql.database.azure.com"
 dbUserName=$(cat $WDIR/dbUserName.txt)
 echo "============================"

@@ -35,7 +35,7 @@ update_wp_config() {
 
 
   local d=$'\x1f'
-  local script="s${d}\\(define([[:space:]]*[\"']*${key}[\"']*[[:space:]]*,[[:space:]]*'\\)[^']*\\('[[:space:]]*\\)${d}\\1${repl}\\2${d}"
+  local script="s${d}\\(define([[:space:]]*[\"']${key}[\"'][[:space:]]*,[[:space:]]*['\"]\\)[^'\"]*\\(['\"][[:space:]]*\\)${d}\\1${repl}\\2${d}"
 
   sed_inplace "$script" "$file"
 }
