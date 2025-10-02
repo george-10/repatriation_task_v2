@@ -10,13 +10,13 @@ if [ $# -ne 2 ]; then
   exit 1
 fi
 
-DB_HOST=$(grep "define( 'DB_HOST'" "$CONFIG_FILE" | sed "s/.*'DB_HOST', *'\([^']*\)'.*/\1/")
+DB_HOST=$(grep "DB_HOST" "$CONFIG_FILE" | sed "s/.*'DB_HOST', *'\([^']*\)'.*/\1/")
 DB_ROOT_USER=$1
 DB_ROOT_PASS=$2
 
-DB_NAME=$(grep "define( 'DB_NAME'" "$CONFIG_FILE" | sed "s/.*'DB_NAME', *'\([^']*\)'.*/\1/")
-DB_USER=$(grep "define( 'DB_USER'" "$CONFIG_FILE" | sed "s/.*'DB_USER', *'\([^']*\)'.*/\1/")
-DB_PASS=$(grep "define( 'DB_PASSWORD'" "$CONFIG_FILE" | sed "s/.*'DB_PASSWORD', *'\([^']*\)'.*/\1/")
+DB_NAME=$(grep "DB_NAME" "$CONFIG_FILE" | sed "s/.*'DB_NAME', *'\([^']*\)'.*/\1/")
+DB_USER=$(grep "DB_USER" "$CONFIG_FILE" | sed "s/.*'DB_USER', *'\([^']*\)'.*/\1/")
+DB_PASS=$(grep "DB_PASSWORD" "$CONFIG_FILE" | sed "s/.*'DB_PASSWORD', *'\([^']*\)'.*/\1/")
 
 echo "Adding database user '$DB_USER' with access to database '$DB_NAME' on host '$DB_HOST' ..."
 
