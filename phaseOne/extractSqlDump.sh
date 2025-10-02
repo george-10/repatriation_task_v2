@@ -16,7 +16,7 @@ fi
 
 
 user=$1
-database=$(grep "DB_NAME" "$CONFIG_FILE" | sed -E "s/.'DB_NAME', *['\"]([^'\"])['\"].*/\1/")
+database=$(grep "define( [\"']DB_NAME[\"']" "$CONFIG_FILE" | sed "s/.*'DB_NAME', *'\([^']*\)'.*/\1/")
 pass=$2
 host=$3
 
@@ -30,5 +30,5 @@ if [ $? -eq 0 ]; then
     echo -e "Import completed successfully \n"
 else
     echo -e "Import failed \n"
-    exit 1
+    exit 1
 fi

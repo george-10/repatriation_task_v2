@@ -38,7 +38,7 @@ dbUserName=$(jq -r '.resources[] | select(.properties.administratorLogin != null
 
 echo $dbUserName > $WDIR/dbUserName.txt
 
-dbDatabase=$(grep "DB_NAME" "$CONFIG_FILE" | sed "s/.*'DB_NAME', *'\([^']*\)'.*/\1/")
+dbDatabase=$(grep "define( [\"']DB_NAME[\"']" "$CONFIG_FILE" | sed "s/.*'DB_NAME', *'\([^']*\)'.*/\1/")
 
 echo "oldUserName: $oldUserName"
 echo "dbServerHostName: $dbServerHostName"
